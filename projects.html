@@ -77,7 +77,24 @@
                     width: 100%;
                     height: auto;
                 }
+
+                .carousel-control-prev,
+                .carousel-control-next {
+                    display: none; /* Hide the buttons */
+                }
+
+                #phone-instruction {
+                    display: block !important; /* Show the instruction on screens smaller than 991px */
+                }
             }
+
+            @media (min-width: 992px) {
+                #phone-instruction {
+                    display: none !important; /* Hide the instruction on screens 992px and up */
+                }
+            }
+
+
             @media (max-width: 453px) {
                 .d-flex.justify-content-center {
                     flex-direction: column;
@@ -136,7 +153,13 @@
             .carousel-control-next.custom-carousel-arrow {
                 right: 10px; /* Position the next arrow at the right */
             }
+            
 
+            #phone-instruction p {
+            margin: 0; /* Remove any default margin from the paragraph */
+            width: 100%; /* Ensure the paragraph takes up the full width of its container */
+            text-align: center; /* Center the text */
+        }
         </style>
     </head>
     <body class="d-flex flex-column h-100 bg-light">
@@ -176,6 +199,9 @@
                                                 <li><b>Description</b>: Developed a Power BI dashboard for a grocery store. The source of raw data is from Microsoft Excel containing 180K rows of raw data.</li>
                                                 <li><b>Contribution</b>: Perform data cleaning and data manipulation using Power Query Editor, develop a sales insight dashboard to visualize the trends related to products and suppliers for inventory management team focusing on identify the low-performing products and eliminate them from inventory.</li>
                                             </ul>
+                                            <div class="d-flex justify-content-center p-1 d-none d-md-block" id="phone-instruction">
+                                                <p><b><- Swipe to view more -></b></p>
+                                            </div>
                                             <div id="carouselDashboardIndicators" class="carousel slide" data-bs-ride="carousel">
                                                 <div class="carousel-indicators">
                                                     <button type="button" data-bs-target="#carouselDashboardIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -232,6 +258,9 @@
                                                 <li><b>Description</b>: Developed a Tableau dashboard for a Coffe shop. Geared towards marketing and inventory teams focusing on monthly promotions and following inventory plan.</li>
                                                 <li><b>Contribution</b>: Conducted analysis in SQL to surface insights on sales trends for a shop sales dataset from Kaggle containing 149k transaction records. Worked independently to clean and analyse data in SQL and built performance dashboard in Tableau to visualize trends related to revenue, product category, and sales.</li>
                                             </ul>
+                                            <div class="d-flex justify-content-center p-1 d-none d-md-block" id="phone-instruction">
+                                                <p><b><- Swipe to view more -></b></p>
+                                            </div>
                                             <div id="carouselTableauIndicators" class="carousel slide" data-bs-ride="carousel">
                                                 <div class="carousel-indicators">
                                                     <button type="button" data-bs-target="#carouselTableauIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -282,6 +311,9 @@
                                                 <li><b>Description</b>: Developed a dashboard providing insight for consulting team to make digital marketing and branding decision.</li>
                                                 <li><b>Contribution</b>: Independently clean and manipulate the data using Microsoft Excel on a 20K rows of Social Media Conversation dataset. Built a business level dashboard using pivot table, pivot chart and slicers providing information to make right digital marketing and branding decision.</li>
                                             </ul>
+                                            <div class="d-flex justify-content-center p-1 d-none d-md-block" id="phone-instruction">
+                                                <p><b><- Swipe to view more -></b></p>
+                                            </div>
                                             <div id="carouselExcelIndicators" class="carousel slide" data-bs-ride="carousel">
                                                 <div class="carousel-indicators">
                                                     <button type="button" data-bs-target="#carouselExcelIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -338,6 +370,9 @@
                                                 <li><b>Description</b>: This project is about the blend of machine learning with software, as a system is taking attendance using computer vision and face recognition modal.</li>
                                                 <li><b>Contribution</b>: Use Django for back-end development and TensorFlow train the machine learning modal with 95% recognition success rate. This project emphasize my ability to manage the whole project using Software Development Life Cycle – Agile Model, ability to manage database design and database modelling using SQL.</li>
                                             </ul>
+                                            <div class="d-flex justify-content-center p-1 d-none d-md-block" id="phone-instruction">
+                                                <p><b><- Swipe to view more -></b></p>
+                                            </div>
                                                 <div id="carouselFaceIndicators" class="carousel slide" data-bs-ride="carousel">
                                                     <div class="carousel-indicators">
                                                         <button type="button" data-bs-target="#carouselFaceIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -393,6 +428,9 @@
                                                 <li><b>Description</b>: This project is a BI Dashboard software developed for business to extract data from JSON file and display them in dashboard form to provide business insights.</li>
                                                 <li><b>Contribution</b>: This project is developed purely using Java, CSS to style the buttons, table, graph, etc. Moreover, my familiarity toward version control, Git also important as part of this project.</li>
                                             </ul>
+                                            <div class="d-flex justify-content-center p-1 d-none d-md-block" id="phone-instruction">
+                                                <p><b><- Swipe to view more -></b></p>
+                                            </div>
                                             <div class="d-flex justify-content-center p-1">
                                                 <img class="img-fluid" src="assets/java-cover.png"/>
                                             </div>
@@ -417,6 +455,9 @@
                                                 <li><b>Description</b>: MemesHub is a social media website for user to share memes and get feedback or reactions from the others.</li>
                                                 <li><b>Contribution</b>: This project emphasize my ability to work with XAMPP as server, PHP for back-end development MySQL for database management. Moreover, my familiarity toward version control, Git also important as part of this project. </li>
                                             </ul>
+                                            <div class="d-flex justify-content-center p-1 d-none d-md-block" id="phone-instruction">
+                                                <p><b><- Swipe to view more -></b></p>
+                                            </div>
                                                 <div id="carouselPhpIndicators" class="carousel slide" data-bs-ride="carousel">
                                                     <div class="carousel-indicators">
                                                         <button type="button" data-bs-target="#carouselPhpIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
