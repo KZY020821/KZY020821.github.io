@@ -1,355 +1,622 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Khor Ze Yi - Projects</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/icon.png" />
-        <!-- Custom Google font-->
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet" />
-        <!-- Bootstrap icons-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/styles.css" rel="stylesheet" />
-        <link rel="preload" href="assets/face-cover01.png" as="image">
-        <link rel="preload" href="assets/face-cover03.png" as="image">
-        <link rel="preload" href="assets/php-cover02.png" as="image">
-        <link rel="preload" href="assets/php-cover03.png" as="image">
-        <link rel="preload" href="assets/tableau-cover02.png" as="image">
-        <link rel="preload" href="assets/tableau-cover03.png" as="image">
-        <link rel="preload" href="assets/bi02.png" as="image">
-        <link rel="preload" href="assets/bi03.png" as="image">
-        <link rel="preload" href="assets/bi04.png" as="image">
-        <link rel="preload" href="assets/excel02.png" as="image">
-        <link rel="preload" href="assets/excel03.png" as="image">
-        <link rel="preload" href="assets/excel04.png" as="image">
-        <style>
-            @media (max-width: 767px) {
-                #dashboard .p-5 {
-                    padding: 1rem !important;
-                }
-
-                #tableau .p-5 {
-                    padding: 1rem !important;
-                }
-
-                #excel .p-5 {
-                    padding: 1rem !important;
-                }
-
-                #face .p-5 {
-                    padding: 1rem !important;
-                }
-
-                #JavaFX .p-5 {
-                    padding: 1rem !important;
-                }
-
-                #php .p-5 {
-                    padding: 1rem !important;
-                }
-            }
-
-            @media (max-width: 991px) {
-                .btn.btn-primary {
-                    font-size: 0.875rem;
-                }
-
-                #dashboard img.img-fluid {
-                    width: 100%;
-                    height: auto;
-                }
-
-                #tableau img.img-fluid {
-                    width: 100%;
-                    height: auto;
-                }
-                
-                #excel img.img-fluid {
-                    width: 100%;
-                    height: auto;
-                }
-
-                #face img.img-fluid {
-                    width: 100%;
-                    height: auto;
-                }
-
-                #JavaFX img.img-fluid {
-                    width: 100%;
-                    height: auto;
-                }
-
-                #php img.img-fluid {
-                    width: 100%;
-                    height: auto;
-                }
-
-                .carousel-control-prev,
-                .carousel-control-next {
-                    display: none; /* Hide the buttons */
-                }
-
-                #phone-instruction {
-                    display: block !important; /* Show the instruction on screens smaller than 991px */
-                }
-            }
-
-            @media (min-width: 992px) {
-                #phone-instruction {
-                    display: none !important; /* Hide the instruction on screens 992px and up */
-                }
-            }
-
-
-            @media (max-width: 453px) {
-                .d-flex.justify-content-center {
-                    flex-direction: column;
-                    align-items: center;
-                }
-
-                .d-flex.justify-content-center .p-1 {
-                    width: 100%; /* Optional: make the button take full width */
-                    text-align: center;
-                }
-            }
-            .custom-carousel-arrow .carousel-control-prev-icon,
-            .custom-carousel-arrow .carousel-control-next-icon {
-                background-color: black; /* Change arrow color to black */
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-                border-radius: 50%;
-                padding: 10px; /* Adjust the padding to increase the icon size */
-            }
-
-            .custom-carousel-arrow {
-                width: 60px; /* Adjust the size of the arrow container */
-                height: 60px;
-            }
-
-            .custom-carousel-arrow .carousel-control-prev-icon,
-            .custom-carousel-arrow .carousel-control-next-icon {
-                width: 100%; /* Ensure the icon takes up the full container */
-                height: 100%;
-            }
-            /* Ensure the carousel container has relative positioning */
-            .carousel {
-                position: relative;
-            }
-
-            /* Center the carousel control buttons */
-            .custom-carousel-arrow {
-                width: 60px; /* Adjust the size of the arrow container */
-                height: 60px;
-                position: absolute; /* Position absolutely within the carousel container */
-                top: 50%; /* Center vertically */
-                transform: translateY(-50%); /* Adjust vertical alignment */
-            }
-
-            .custom-carousel-arrow .carousel-control-prev-icon,
-            .custom-carousel-arrow .carousel-control-next-icon {
-                background-color: black; /* Change arrow color to black */
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-                border-radius: 50%;
-                padding: 10px; /* Adjust the padding to increase the icon size */
-            }
-
-            .carousel-control-prev.custom-carousel-arrow {
-                left: 10px; /* Position the previous arrow at the left */
-            }
-
-            .carousel-control-next.custom-carousel-arrow {
-                right: 10px; /* Position the next arrow at the right */
-            }
-            
-
-            #phone-instruction p {
-            margin: 0; /* Remove any default margin from the paragraph */
-            width: 100%; /* Ensure the paragraph takes up the full width of its container */
-            text-align: center; /* Center the text */
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Khor Ze Yi - Projects</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/icon.png" />
+    <!-- Custom Google font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap icons-->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="css/styles.css" rel="stylesheet" />
+    <link rel="preload" href="assets/face-cover01.png" as="image" />
+    <link rel="preload" href="assets/face-cover03.png" as="image" />
+    <link rel="preload" href="assets/php-cover02.png" as="image" />
+    <link rel="preload" href="assets/php-cover03.png" as="image" />
+    <link rel="preload" href="assets/tableau-cover02.png" as="image" />
+    <link rel="preload" href="assets/tableau-cover03.png" as="image" />
+    <link rel="preload" href="assets/bi02.png" as="image" />
+    <link rel="preload" href="assets/bi03.png" as="image" />
+    <link rel="preload" href="assets/bi04.png" as="image" />
+    <link rel="preload" href="assets/excel02.png" as="image" />
+    <link rel="preload" href="assets/excel03.png" as="image" />
+    <link rel="preload" href="assets/excel04.png" as="image" />
+    <style>
+      @media (max-width: 767px) {
+        #dashboard .p-5 {
+          padding: 1rem !important;
         }
-        </style>
-    </head>
-    <body class="d-flex flex-column h-100 bg-light">
-        <main class="flex-shrink-0">
-            <!-- Navigation-->
-            <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
-                <div class="container px-5">
-                    <a class="navbar-brand" href="index.html"><span class="fw-bolder text-primary">Khor Ze Yi</span></a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
-                            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                            <li class="nav-item"><a class="nav-link" href="resume.html">Resume</a></li>
-                            <li class="nav-item"><a class="nav-link" style="color: #1826c2;" href="projects.html">Projects</a></li>
-                            <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-                        </ul>
+
+        #tableau .p-5 {
+          padding: 1rem !important;
+        }
+
+        #excel .p-5 {
+          padding: 1rem !important;
+        }
+
+        #face .p-5 {
+          padding: 1rem !important;
+        }
+
+        #JavaFX .p-5 {
+          padding: 1rem !important;
+        }
+
+        #php .p-5 {
+          padding: 1rem !important;
+        }
+      }
+
+      @media (max-width: 991px) {
+        .btn.btn-primary {
+          font-size: 0.875rem;
+        }
+
+        #dashboard img.img-fluid {
+          width: 100%;
+          height: auto;
+        }
+
+        #tableau img.img-fluid {
+          width: 100%;
+          height: auto;
+        }
+
+        #excel img.img-fluid {
+          width: 100%;
+          height: auto;
+        }
+
+        #face img.img-fluid {
+          width: 100%;
+          height: auto;
+        }
+
+        #JavaFX img.img-fluid {
+          width: 100%;
+          height: auto;
+        }
+
+        #php img.img-fluid {
+          width: 100%;
+          height: auto;
+        }
+
+        .carousel-control-prev,
+        .carousel-control-next {
+          display: none; /* Hide the buttons */
+        }
+
+        #phone-instruction {
+          display: block !important; /* Show the instruction on screens smaller than 991px */
+        }
+      }
+
+      @media (min-width: 992px) {
+        #phone-instruction {
+          display: none !important; /* Hide the instruction on screens 992px and up */
+        }
+      }
+
+      @media (max-width: 453px) {
+        .d-flex.justify-content-center {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .d-flex.justify-content-center .p-1 {
+          width: 100%; /* Optional: make the button take full width */
+          text-align: center;
+        }
+      }
+      .custom-carousel-arrow .carousel-control-prev-icon,
+      .custom-carousel-arrow .carousel-control-next-icon {
+        background-color: black; /* Change arrow color to black */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        border-radius: 50%;
+        padding: 10px; /* Adjust the padding to increase the icon size */
+      }
+
+      .custom-carousel-arrow {
+        width: 60px; /* Adjust the size of the arrow container */
+        height: 60px;
+      }
+
+      .custom-carousel-arrow .carousel-control-prev-icon,
+      .custom-carousel-arrow .carousel-control-next-icon {
+        width: 100%; /* Ensure the icon takes up the full container */
+        height: 100%;
+      }
+      /* Ensure the carousel container has relative positioning */
+      .carousel {
+        position: relative;
+      }
+
+      /* Center the carousel control buttons */
+      .custom-carousel-arrow {
+        width: 60px; /* Adjust the size of the arrow container */
+        height: 60px;
+        position: absolute; /* Position absolutely within the carousel container */
+        top: 50%; /* Center vertically */
+        transform: translateY(-50%); /* Adjust vertical alignment */
+      }
+
+      .custom-carousel-arrow .carousel-control-prev-icon,
+      .custom-carousel-arrow .carousel-control-next-icon {
+        background-color: black; /* Change arrow color to black */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        border-radius: 50%;
+        padding: 10px; /* Adjust the padding to increase the icon size */
+      }
+
+      .carousel-control-prev.custom-carousel-arrow {
+        left: 10px; /* Position the previous arrow at the left */
+      }
+
+      .carousel-control-next.custom-carousel-arrow {
+        right: 10px; /* Position the next arrow at the right */
+      }
+
+      #phone-instruction p {
+        margin: 0; /* Remove any default margin from the paragraph */
+        width: 100%; /* Ensure the paragraph takes up the full width of its container */
+        text-align: center; /* Center the text */
+      }
+    </style>
+  </head>
+  <body class="d-flex flex-column h-100 bg-light">
+    <main class="flex-shrink-0">
+      <!-- Navigation-->
+      <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
+        <div class="container px-5">
+          <a class="navbar-brand" href="index.html"
+            ><span class="fw-bolder text-primary">Khor Ze Yi</span></a
+          >
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
+              <li class="nav-item">
+                <a class="nav-link" href="index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="resume.html">Resume</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="color: #1826c2" href="projects.html"
+                  >Projects</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <!-- Projects Section-->
+      <section class="py-5">
+        <div class="container px-5 mb-5">
+          <div class="text-center mb-5">
+            <h1 class="display-5 fw-bolder mb-0">
+              <span class="text-gradient d-inline">Personal Projects</span>
+            </h1>
+          </div>
+          <div class="row gx-5 justify-content-center">
+            <div class="col-auto">
+              <!-- Project Card 1-->
+              <div
+                class="card overflow-hidden shadow rounded-4 border-0 mb-5"
+                id="face"
+              >
+                <div class="card-body p-5">
+                  <div class="d-flex align-items-center">
+                    <div class="p-0">
+                      <h2 class="fw-bolder">
+                        Bolt-FRAS Face Recognition Attendance System
+                      </h2>
+                      <ul>
+                        <li>
+                          <b>Skills Used</b>: Machine Learning, Software
+                          Development, Computer Vision, Project Management,
+                          Software Development Life Cycle, Front-end
+                          Development, Back-end Development, Database
+                          Management, Version Control, Dashboard Development
+                        </li>
+                        <li>
+                          <b>Technologies Used</b>: Python, Django, TensorFlow,
+                          OpenCV, SQLite, HTML, CSS, JavaScript, jQuery,
+                          Bootstrap5, Git
+                        </li>
+                        <li>
+                          <b>Description</b>: This project is about the blend of
+                          machine learning with software, as a system is taking
+                          attendance using computer vision and face recognition
+                          modal.
+                        </li>
+                        <li>
+                          <b>Contribution</b>: Use Django for back-end
+                          development and TensorFlow train the machine learning
+                          modal with 95% recognition success rate. This project
+                          emphasize my ability to manage the whole project using
+                          Software Development Life Cycle – Agile Model, ability
+                          to manage database design and database modelling using
+                          SQL.
+                        </li>
+                      </ul>
+                      <div
+                        class="d-flex justify-content-center p-1 d-none d-md-block"
+                        id="phone-instruction"
+                      >
+                        <p><b><- Swipe to view more -></b></p>
+                      </div>
+                      <div
+                        id="carouselFaceIndicators"
+                        class="carousel slide"
+                        data-bs-ride="carousel"
+                      >
+                        <div class="carousel-indicators">
+                          <button
+                            type="button"
+                            data-bs-target="#carouselFaceIndicators"
+                            data-bs-slide-to="0"
+                            class="active"
+                            aria-current="true"
+                            aria-label="Slide 1"
+                          ></button>
+                          <button
+                            type="button"
+                            data-bs-target="#carouselFaceIndicators"
+                            data-bs-slide-to="1"
+                            aria-label="Slide 2"
+                          ></button>
+                          <button
+                            type="button"
+                            data-bs-target="#carouselFaceIndicators"
+                            data-bs-slide-to="2"
+                            aria-label="Slide 3"
+                          ></button>
+                          <button
+                            type="button"
+                            data-bs-target="#carouselFaceIndicators"
+                            data-bs-slide-to="3"
+                            aria-label="Slide 4"
+                          ></button>
+                          <button
+                            type="button"
+                            data-bs-target="#carouselFaceIndicators"
+                            data-bs-slide-to="3"
+                            aria-label="Slide 5"
+                          ></button>
+                        </div>
+                        <div class="carousel-inner">
+                          <div class="carousel-item active">
+                            <div class="d-flex justify-content-center p-1">
+                              <img
+                                loading="lazy"
+                                class="d-block img-fluid"
+                                src="assets/face1.webp"
+                                alt="Slide 1"
+                              />
+                            </div>
+                          </div>
+                          <div class="carousel-item">
+                            <div class="d-flex justify-content-center p-1">
+                              <img
+                                class="d-block img-fluid"
+                                src="assets/face2.webp"
+                                alt="Slide 2"
+                              />
+                            </div>
+                          </div>
+                          <div class="carousel-item">
+                            <div class="d-flex justify-content-center p-1">
+                              <img
+                                class="d-block img-fluid"
+                                src="assets/face3.webp"
+                                alt="Slide 3"
+                              />
+                            </div>
+                          </div>
+                          <div class="carousel-item">
+                            <div class="d-flex justify-content-center p-1">
+                              <img
+                                class="d-block img-fluid"
+                                src="assets/face4.webp"
+                                alt="Slide 4"
+                              />
+                            </div>
+                          </div>
+                          <div class="carousel-item">
+                            <div class="d-flex justify-content-center p-1">
+                              <img
+                                class="d-block img-fluid"
+                                src="assets/face5.webp"
+                                alt="Slide 5"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <button
+                          class="carousel-control-prev custom-carousel-arrow"
+                          type="button"
+                          data-bs-target="#carouselFaceIndicators"
+                          data-bs-slide="prev"
+                        >
+                          <span
+                            class="carousel-control-prev-icon"
+                            aria-hidden="true"
+                          ></span>
+                          <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button
+                          class="carousel-control-next custom-carousel-arrow"
+                          type="button"
+                          data-bs-target="#carouselFaceIndicators"
+                          data-bs-slide="next"
+                        >
+                          <span
+                            class="carousel-control-next-icon"
+                            aria-hidden="true"
+                          ></span>
+                          <span class="visually-hidden">Next</span>
+                        </button>
+                      </div>
+                      <div class="d-flex justify-content-center p-1">
+                        <div class="p-1">
+                          <a
+                            href="https://showcase.ypccollege.edu.my/system-and-application-categories/face-recognition-college-attendance-system"
+                            target="_blank"
+                            ><button
+                              class="btn btn-primary"
+                              type="button"
+                              style="font-size: large"
+                            >
+                              <i class="bi bi-eye"></i> View Detail
+                            </button></a
+                          >
+                        </div>
+                        <div class="p-1">
+                          <a
+                            href="https://github.com/KZY020821/finalYearProject"
+                            target="_blank"
+                            ><button
+                              class="btn btn-primary"
+                              type="button"
+                              style="font-size: large"
+                            >
+                              <i class="bi bi-github"></i> GitHub Code
+                            </button></a
+                          >
+                        </div>
+                      </div>
                     </div>
+                  </div>
                 </div>
-            </nav>
-            <!-- Projects Section-->
-            <section class="py-5">
-                <div class="container px-5 mb-5">
-                    <div class="text-center mb-5">
-                        <h1 class="display-5 fw-bolder mb-0"><span class="text-gradient d-inline">Projects</span></h1>
+              </div>
+              <div
+                class="card overflow-hidden shadow rounded-4 border-0 mb-5"
+                id="JavaFX"
+              >
+                <div class="card-body p-0">
+                  <div class="d-flex align-items-center">
+                    <div class="p-5">
+                      <h2 class="fw-bolder">
+                        Java Business Intelligence Dashboard Software
+                      </h2>
+                      <ul>
+                        <li>
+                          <b>Skills Used</b>: Dashboard Development, Software
+                          Development, Business Intelligence, Version Control
+                        </li>
+                        <li>
+                          <b>Technologies Used</b>: Java, JavaFX, CSS, Git
+                        </li>
+                        <li>
+                          <b>Description</b>: This project is a BI Dashboard
+                          software developed for business to extract data from
+                          JSON file and display them in dashboard form to
+                          provide business insights.
+                        </li>
+                        <li>
+                          <b>Contribution</b>: This project is developed purely
+                          using Java, CSS to style the buttons, table, graph,
+                          etc. Moreover, my familiarity toward version control,
+                          Git also important as part of this project.
+                        </li>
+                      </ul>
+                      <div
+                        class="d-flex justify-content-center p-1 d-none d-md-block"
+                        id="phone-instruction"
+                      >
+                        <p><b><- Swipe to view more -></b></p>
+                      </div>
+                      <div class="d-flex justify-content-center p-1">
+                        <img
+                          loading="lazy"
+                          class="img-fluid"
+                          src="assets/java.webp"
+                        />
+                      </div>
+                      <div class="d-flex justify-content-center p-1">
+                        <div class="p-1">
+                          <a
+                            href="https://github.com/KZY020821/JavaFX-BI-Dashboard/tree/main/src/javaPackages"
+                            target="_blank"
+                            ><button
+                              class="btn btn-primary"
+                              type="button"
+                              style="font-size: large"
+                            >
+                              <i class="bi bi-github"></i> GitHub Code
+                            </button></a
+                          >
+                        </div>
+                      </div>
                     </div>
-                    <div class="row gx-5 justify-content-center">
-                        <div class="col-auto">
-                            <!-- Project Card 1-->
-                            <div class="card overflow-hidden shadow rounded-4 border-0  mb-5" id="face">
-                                <div class="card-body p-5">
-                                    <div class="d-flex align-items-center">
-                                        <div class="p-0">
-                                            <h2 class="fw-bolder">Bolt-FRAS Face Recognition Attendance System</h2>
-                                            <ul>
-                                                <li><b>Skills Used</b>: Machine Learning, Software Development, Computer Vision, Project Management, Software Development Life Cycle, Front-end Development, Back-end Development, Database Management, Version Control, Dashboard Development</li>
-                                                <li><b>Technologies Used</b>: Python, Django, TensorFlow, OpenCV, SQLite, HTML, CSS, JavaScript, jQuery, Bootstrap5, Git</li>
-                                                <li><b>Description</b>: This project is about the blend of machine learning with software, as a system is taking attendance using computer vision and face recognition modal.</li>
-                                                <li><b>Contribution</b>: Use Django for back-end development and TensorFlow train the machine learning modal with 95% recognition success rate. This project emphasize my ability to manage the whole project using Software Development Life Cycle – Agile Model, ability to manage database design and database modelling using SQL.</li>
-                                            </ul>
-                                            <div class="d-flex justify-content-center p-1 d-none d-md-block" id="phone-instruction">
-                                                <p><b><- Swipe to view more -></b></p>
-                                            </div>
-                                                <div id="carouselFaceIndicators" class="carousel slide" data-bs-ride="carousel">
-                                                    <div class="carousel-indicators">
-                                                        <button type="button" data-bs-target="#carouselFaceIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                                                        <button type="button" data-bs-target="#carouselFaceIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                                                        <button type="button" data-bs-target="#carouselFaceIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                                                        <button type="button" data-bs-target="#carouselFaceIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
-                                                        <button type="button" data-bs-target="#carouselFaceIndicators" data-bs-slide-to="3" aria-label="Slide 5"></button>
-                                                    </div>
-                                                    <div class="carousel-inner">
-                                                        <div class="carousel-item active">
-                                                            <div class="d-flex justify-content-center p-1">
-                                                                <img loading="lazy" class="d-block img-fluid" src="assets/face1.webp" alt="Slide 1">    
-                                                            </div>
-                                                        </div>
-                                                        <div class="carousel-item">
-                                                            <div class="d-flex justify-content-center p-1">
-                                                                <img class="d-block img-fluid" src="assets/face2.webp" alt="Slide 2">    
-                                                            </div>
-                                                        </div>
-                                                        <div class="carousel-item">
-                                                            <div class="d-flex justify-content-center p-1">
-                                                                <img class="d-block img-fluid" src="assets/face3.webp" alt="Slide 3">    
-                                                            </div>
-                                                        </div>
-                                                        <div class="carousel-item">
-                                                            <div class="d-flex justify-content-center p-1">
-                                                                <img class="d-block img-fluid" src="assets/face4.webp" alt="Slide 4">    
-                                                            </div>
-                                                        </div>
-                                                        <div class="carousel-item">
-                                                            <div class="d-flex justify-content-center p-1">
-                                                                <img class="d-block img-fluid" src="assets/face5.webp" alt="Slide 5">    
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <button class="carousel-control-prev custom-carousel-arrow" type="button" data-bs-target="#carouselFaceIndicators" data-bs-slide="prev">
-                                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                                        <span class="visually-hidden">Previous</span>
-                                                    </button>
-                                                    <button class="carousel-control-next custom-carousel-arrow" type="button" data-bs-target="#carouselFaceIndicators" data-bs-slide="next">
-                                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                                        <span class="visually-hidden">Next</span>
-                                                    </button>
-                                                </div>
-                                            <div class="d-flex justify-content-center p-1">
-                                                <div class="p-1">
-                                                    <a href="https://showcase.ypccollege.edu.my/system-and-application-categories/face-recognition-college-attendance-system" target="_blank"><button class="btn btn-primary" type="button" style="font-size: large;"><i class="bi bi-eye"></i> View Detail</button></a>
-                                                </div>
-                                                <div class="p-1">
-                                                    <a href="https://github.com/KZY020821/finalYearProject" target="_blank"><button class="btn btn-primary" type="button" style="font-size: large;"><i class="bi bi-github"></i> GitHub Code</button></a>
-                                                </div>
-                                            </div>
-                                        </div>                                        
-                                    </div>
-                                </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="card overflow-hidden shadow rounded-4 border-0 mb-5"
+                id="php"
+              >
+                <div class="card-body p-0">
+                  <div class="d-flex align-items-center">
+                    <div class="p-5">
+                      <h2 class="fw-bolder">MemesHub</h2>
+                      <ul>
+                        <li>
+                          <b>Skills Used</b>: Website Development, Front-end
+                          Development, Back-end Development, Database
+                          Management, Version Control
+                        </li>
+                        <li>
+                          <b>Technologies Used</b>: XAMPP, PHP, MySQL, HTML,
+                          CSS, JavaScript, jQuery, Bootstrap5, Git
+                        </li>
+                        <li>
+                          <b>Description</b>: MemesHub is a social media website
+                          for user to share memes and get feedback or reactions
+                          from the others.
+                        </li>
+                        <li>
+                          <b>Contribution</b>: This project emphasize my ability
+                          to work with XAMPP as server, PHP for back-end
+                          development MySQL for database management. Moreover,
+                          my familiarity toward version control, Git also
+                          important as part of this project.
+                        </li>
+                      </ul>
+                      <div
+                        class="d-flex justify-content-center p-1 d-none d-md-block"
+                        id="phone-instruction"
+                      >
+                        <p><b><- Swipe to view more -></b></p>
+                      </div>
+                      <div
+                        id="carouselPhpIndicators"
+                        class="carousel slide"
+                        data-bs-ride="carousel"
+                      >
+                        <div class="carousel-indicators">
+                          <button
+                            type="button"
+                            data-bs-target="#carouselPhpIndicators"
+                            data-bs-slide-to="0"
+                            class="active"
+                            aria-current="true"
+                            aria-label="Slide 1"
+                          ></button>
+                          <button
+                            type="button"
+                            data-bs-target="#carouselPhpIndicators"
+                            data-bs-slide-to="1"
+                            aria-label="Slide 2"
+                          ></button>
+                          <button
+                            type="button"
+                            data-bs-target="#carouselPhpIndicators"
+                            data-bs-slide-to="2"
+                            aria-label="Slide 3"
+                          ></button>
+                        </div>
+                        <div class="carousel-inner">
+                          <div class="carousel-item active">
+                            <div class="d-flex justify-content-center p-1">
+                              <img
+                                loading="lazy"
+                                class="d-block img-fluid"
+                                src="assets/php1.webp"
+                                alt="Slide 1"
+                              />
                             </div>
-                            <div class="card overflow-hidden shadow rounded-4 border-0  mb-5" id="JavaFX">
-                                <div class="card-body p-0">
-                                    <div class="d-flex align-items-center">
-                                        <div class="p-5">
-                                            <h2 class="fw-bolder">Java Business Intelligence Dashboard Software</h2>
-                                            <ul>
-                                                <li><b>Skills Used</b>: Dashboard Development, Software Development, Business Intelligence, Version Control</li>
-                                                <li><b>Technologies Used</b>: Java, JavaFX, CSS, Git</li>
-                                                <li><b>Description</b>: This project is a BI Dashboard software developed for business to extract data from JSON file and display them in dashboard form to provide business insights.</li>
-                                                <li><b>Contribution</b>: This project is developed purely using Java, CSS to style the buttons, table, graph, etc. Moreover, my familiarity toward version control, Git also important as part of this project.</li>
-                                            </ul>
-                                            <div class="d-flex justify-content-center p-1 d-none d-md-block" id="phone-instruction">
-                                                <p><b><- Swipe to view more -></b></p>
-                                            </div>
-                                            <div class="d-flex justify-content-center p-1">
-                                                <img loading="lazy" class="img-fluid" src="assets/java.webp"/>
-                                            </div>
-                                            <div class="d-flex justify-content-center p-1">
-                                                <div class="p-1">
-                                                    <a href="https://github.com/KZY020821/JavaFX-BI-Dashboard/tree/main/src/javaPackages" target="_blank"><button class="btn btn-primary" type="button" style="font-size: large;"><i class="bi bi-github"></i> GitHub Code</button></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                          </div>
+                          <div class="carousel-item">
+                            <div class="d-flex justify-content-center p-1">
+                              <img
+                                class="d-block img-fluid"
+                                src="assets/php2.webp"
+                                alt="Slide 2"
+                              />
                             </div>
-                            <div class="card overflow-hidden shadow rounded-4 border-0  mb-5" id="php">
-                                <div class="card-body p-0">
-                                    <div class="d-flex align-items-center">
-                                        <div class="p-5">
-                                            <h2 class="fw-bolder">MemesHub</h2>
-                                            <ul>
-                                                <li><b>Skills Used</b>: Website Development, Front-end Development, Back-end Development, Database Management, Version Control</li>
-                                                <li><b>Technologies Used</b>: XAMPP, PHP, MySQL, HTML, CSS, JavaScript, jQuery, Bootstrap5, Git</li>
-                                                <li><b>Description</b>: MemesHub is a social media website for user to share memes and get feedback or reactions from the others.</li>
-                                                <li><b>Contribution</b>: This project emphasize my ability to work with XAMPP as server, PHP for back-end development MySQL for database management. Moreover, my familiarity toward version control, Git also important as part of this project. </li>
-                                            </ul>
-                                            <div class="d-flex justify-content-center p-1 d-none d-md-block" id="phone-instruction">
-                                                <p><b><- Swipe to view more -></b></p>
-                                            </div>
-                                                <div id="carouselPhpIndicators" class="carousel slide" data-bs-ride="carousel">
-                                                    <div class="carousel-indicators">
-                                                        <button type="button" data-bs-target="#carouselPhpIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                                                        <button type="button" data-bs-target="#carouselPhpIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                                                        <button type="button" data-bs-target="#carouselPhpIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                                                    </div>
-                                                    <div class="carousel-inner">
-                                                        <div class="carousel-item active">
-                                                            <div class="d-flex justify-content-center p-1">
-                                                                <img loading="lazy" class="d-block img-fluid" src="assets/php1.webp" alt="Slide 1">
-                                                            </div>
-                                                        </div>
-                                                        <div class="carousel-item">
-                                                            <div class="d-flex justify-content-center p-1">
-                                                                <img class="d-block img-fluid" src="assets/php2.webp" alt="Slide 2">
-                                                            </div>
-                                                        </div>
-                                                        <div class="carousel-item">
-                                                            <div class="d-flex justify-content-center p-1">
-                                                                <img class="d-block img-fluid" src="assets/php3.webp" alt="Slide 3">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <button class="carousel-control-prev custom-carousel-arrow" type="button" data-bs-target="#carouselPhpIndicators" data-bs-slide="prev">
-                                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                                        <span class="visually-hidden">Previous</span>
-                                                    </button>
-                                                    <button class="carousel-control-next custom-carousel-arrow" type="button" data-bs-target="#carouselPhpIndicators" data-bs-slide="next">
-                                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                                        <span class="visually-hidden">Next</span>
-                                                    </button>
-                                                </div>
-                                            <div class="d-flex justify-content-center p-1">
-                                                <a href="https://github.com/KZY020821/MemesHub" target="_blank"><button class="btn btn-primary" type="button" style="font-size: large;"><i class="bi bi-github"></i> GitHub Code</button></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                          </div>
+                          <div class="carousel-item">
+                            <div class="d-flex justify-content-center p-1">
+                              <img
+                                class="d-block img-fluid"
+                                src="assets/php3.webp"
+                                alt="Slide 3"
+                              />
                             </div>
-                            <!-- <div class="card overflow-hidden shadow rounded-4 border-0  mb-5" id="tableau">
+                          </div>
+                        </div>
+                        <button
+                          class="carousel-control-prev custom-carousel-arrow"
+                          type="button"
+                          data-bs-target="#carouselPhpIndicators"
+                          data-bs-slide="prev"
+                        >
+                          <span
+                            class="carousel-control-prev-icon"
+                            aria-hidden="true"
+                          ></span>
+                          <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button
+                          class="carousel-control-next custom-carousel-arrow"
+                          type="button"
+                          data-bs-target="#carouselPhpIndicators"
+                          data-bs-slide="next"
+                        >
+                          <span
+                            class="carousel-control-next-icon"
+                            aria-hidden="true"
+                          ></span>
+                          <span class="visually-hidden">Next</span>
+                        </button>
+                      </div>
+                      <div class="d-flex justify-content-center p-1">
+                        <a
+                          href="https://github.com/KZY020821/MemesHub"
+                          target="_blank"
+                          ><button
+                            class="btn btn-primary"
+                            type="button"
+                            style="font-size: large"
+                          >
+                            <i class="bi bi-github"></i> GitHub Code
+                          </button></a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="card overflow-hidden shadow rounded-4 border-0  mb-5" id="tableau">
                                 <div class="card-body p-5">
                                     <div class="d-flex align-items-center">
                                         <div class="p-0">
@@ -520,23 +787,29 @@
                                     </div>
                                 </div>
                             </div> -->
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- Call to action section-->
-            <section class="py-5 bg-gradient-primary-to-secondary text-white">
-                <div class="container px-5 my-5">
-                    <div class="text-center">
-                        <h2 class="display-4 fw-bolder mb-4">Let's make something happen</h2>
-                        <a class="btn btn-outline-light btn-lg px-5 py-3 fs-6 fw-bolder" href="contact.html">Contact me</a>
-                    </div>
-                </div>
-            </section>
-        </main>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
-    </body>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Call to action section-->
+      <section class="py-5 bg-gradient-primary-to-secondary text-white">
+        <div class="container px-5 my-5">
+          <div class="text-center">
+            <h2 class="display-4 fw-bolder mb-4">
+              Let's make something happen
+            </h2>
+            <a
+              class="btn btn-outline-light btn-lg px-5 py-3 fs-6 fw-bolder"
+              href="contact.html"
+              >Contact me</a
+            >
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="js/scripts.js"></script>
+  </body>
 </html>
