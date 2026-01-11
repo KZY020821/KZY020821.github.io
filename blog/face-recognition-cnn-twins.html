@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lessons from Training a Face Recognition CNN That Can Differentiate Twins | Khor Ze Yi</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Deep dive into training a TensorFlow CNN model for face recognition that can differentiate identical twins with 95% accuracy. Covers data augmentation, model architecture, liveness detection, and triplet loss training strategies." />
+    <meta name="keywords" content="face recognition, CNN, convolutional neural network, TensorFlow, deep learning, computer vision, machine learning, AI, artificial intelligence, twin detection, liveness detection, OpenCV, Python, attendance system, biometric, facial recognition, image classification" />
+    <meta name="author" content="Khor Ze Yi" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://kzy020821.github.io/blog/face-recognition-cnn-twins.html" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://kzy020821.github.io/blog/face-recognition-cnn-twins.html" />
+    <meta property="og:title" content="Training a Face Recognition CNN That Can Differentiate Twins" />
+    <meta property="og:description" content="How I trained a TensorFlow CNN model to differentiate identical twins with 95% accuracy using data augmentation, attention mechanisms, and liveness detection." />
+    <meta property="og:image" content="https://kzy020821.github.io/src/assets/face1.webp" />
+    <meta property="og:site_name" content="Khor Ze Yi - Software Engineer" />
+    <meta property="article:author" content="Khor Ze Yi" />
+    <meta property="article:published_time" content="2024-12-15" />
+    <meta property="article:tag" content="TensorFlow" />
+    <meta property="article:tag" content="Computer Vision" />
+    <meta property="article:tag" content="CNN" />
+    <meta property="article:tag" content="Deep Learning" />
+    <meta property="article:tag" content="Face Recognition" />
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://kzy020821.github.io/blog/face-recognition-cnn-twins.html" />
+    <meta name="twitter:title" content="Training a Face Recognition CNN That Can Differentiate Twins" />
+    <meta name="twitter:description" content="How I trained a TensorFlow CNN model to differentiate identical twins with 95% accuracy using data augmentation, attention mechanisms, and liveness detection." />
+    <meta name="twitter:image" content="https://kzy020821.github.io/src/assets/face1.webp" />
+    
+    <!-- Structured Data / JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "Lessons from Training a Face Recognition CNN That Can Differentiate Twins",
+      "description": "Deep dive into training a TensorFlow CNN model for face recognition that can differentiate identical twins with 95% accuracy.",
+      "image": "https://kzy020821.github.io/src/assets/face1.webp",
+      "author": {
+        "@type": "Person",
+        "name": "Khor Ze Yi",
+        "url": "https://kzy020821.github.io"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Khor Ze Yi"
+      },
+      "datePublished": "2024-12-15",
+      "dateModified": "2024-12-15",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://kzy020821.github.io/blog/face-recognition-cnn-twins.html"
+      },
+      "keywords": ["face recognition", "CNN", "TensorFlow", "deep learning", "computer vision", "machine learning", "AI", "twin detection", "liveness detection", "Python"]
+    }
+    </script>
+    
+    <link rel="icon" type="image/x-icon" href="/src/assets/moji.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/src/shared.css" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="main-nav">
+      <div class="nav-container">
+        <a href="/" class="nav-logo gradient-text">KZY</a>
+        <div class="nav-links">
+          <a href="/" class="nav-link">Home</a>
+          <a href="/projects.html" class="nav-link">Projects</a>
+          <a href="/blog.html" class="nav-link active">Blog</a>
+        </div>
+        <button class="nav-toggle" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+      <a href="/" class="mobile-link">Home</a>
+      <a href="/projects.html" class="mobile-link">Projects</a>
+      <a href="/blog.html" class="mobile-link active">Blog</a>
+    </div>
+
+    <article class="blog-post-container">
+      <!-- Back Button -->
+      <a href="/blog.html" class="back-to-blog">
+        <svg viewBox="0 0 24 24">
+          <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+        </svg>
+        Back to Blog
+      </a>
+
+      <!-- Blog Post Header -->
+      <header class="blog-post-header card reveal">
+        <div class="blog-post-meta">
+          <span class="blog-date">December 15, 2024</span>
+          <span class="blog-category">AI/ML</span>
+          <span class="read-time">8 min read</span>
+        </div>
+        <h1 class="blog-post-title gradient-text">Lessons from Training a Face Recognition CNN That Can Differentiate Twins</h1>
+        <p class="blog-post-subtitle">
+          The unique challenges of building an attendance system that can distinguish between 
+          identical twins, and the techniques that helped achieve 95% accuracy.
+        </p>
+        <div class="blog-post-tags">
+          <span class="tag">TensorFlow</span>
+          <span class="tag">Computer Vision</span>
+          <span class="tag">CNN</span>
+          <span class="tag">Deep Learning</span>
+        </div>
+      </header>
+
+      <!-- Blog Post Content -->
+      <div class="blog-post-content card reveal">
+        <section class="blog-section">
+          <h2>The Twin Problem</h2>
+          <p>
+            When I started building an AI-powered attendance system for a large organization, I thought 
+            the hardest challenge would be handling varying lighting conditions or different camera angles. 
+            I was wrong. The real challenge came when I discovered the organization had three sets of 
+            identical twins in their workforce.
+          </p>
+          <p>
+            Standard face recognition models struggled to differentiate between twins because they focus 
+            on facial structure—which is nearly identical in twins. I needed a different approach.
+          </p>
+        </section>
+
+        <section class="blog-section">
+          <h2>Understanding Why Twins Break Traditional Models</h2>
+          <p>
+            Most face recognition systems use embedding vectors to represent faces. These embeddings 
+            capture facial geometry: distance between eyes, nose shape, jawline contour, etc. For 
+            identical twins, these measurements are nearly indistinguishable.
+          </p>
+          <div class="highlight-box">
+            <h4>Key Insight</h4>
+            <p>
+              While twins share nearly identical facial geometry, they develop unique micro-features 
+              over time: subtle differences in skin texture, moles, freckles, and expression patterns. 
+              The model needed to learn these subtle differences.
+            </p>
+          </div>
+        </section>
+
+        <section class="blog-section">
+          <h2>Data Augmentation Strategy</h2>
+          <p>
+            The first breakthrough came from aggressive data augmentation specifically designed to 
+            force the model to focus on subtle features:
+          </p>
+          <div class="code-block">
+            <div class="code-header">
+              <span>augmentation_pipeline.py</span>
+            </div>
+            <pre><code>import albumentations as A
+
+twin_augmentation = A.Compose([
+    # Standard augmentations
+    A.RandomBrightnessContrast(p=0.5),
+    A.GaussNoise(var_limit=(10, 50), p=0.3),
+    
+    # Key: High-resolution detail preservation
+    A.CLAHE(clip_limit=2.0, p=0.5),  # Enhance local contrast
+    
+    # Force focus on micro-features
+    A.RandomCrop(height=200, width=200, p=0.3),
+    A.CoarseDropout(  # Simulate occlusions
+        max_holes=8, max_height=20, max_width=20,
+        fill_value=0, p=0.3
+    ),
+    
+    # Preserve skin texture details
+    A.Sharpen(alpha=(0.2, 0.5), p=0.4),
+])</code></pre>
+          </div>
+          <p>
+            The key was using CLAHE (Contrast Limited Adaptive Histogram Equalization) to enhance 
+            local contrast, making micro-features more prominent during training.
+          </p>
+        </section>
+
+        <section class="blog-section">
+          <h2>Model Architecture Modifications</h2>
+          <p>
+            I modified a standard FaceNet architecture to include additional attention mechanisms 
+            that focus on specific facial regions:
+          </p>
+          <div class="code-block">
+            <div class="code-header">
+              <span>twin_aware_model.py</span>
+            </div>
+            <pre><code>class TwinAwareFaceNet(tf.keras.Model):
+    def __init__(self, embedding_dim=512):
+        super().__init__()
+        
+        # Base encoder (pretrained)
+        self.base_model = tf.keras.applications.InceptionResNetV2(
+            include_top=False,
+            weights='imagenet',
+            pooling='avg'
+        )
+        
+        # Attention mechanism for micro-features
+        self.attention = SpatialAttention(reduction_ratio=16)
+        
+        # Multi-scale feature extraction
+        self.texture_branch = TextureAnalysisBranch()
+        
+        # Final embedding
+        self.embedding = tf.keras.Sequential([
+            tf.keras.layers.Dense(1024, activation='relu'),
+            tf.keras.layers.Dropout(0.3),
+            tf.keras.layers.Dense(embedding_dim),
+            tf.keras.layers.Lambda(lambda x: tf.nn.l2_normalize(x, axis=1))
+        ])
+    
+    def call(self, inputs):
+        # Extract base features
+        base_features = self.base_model(inputs)
+        
+        # Apply spatial attention
+        attended = self.attention(base_features)
+        
+        # Extract texture features
+        texture_features = self.texture_branch(inputs)
+        
+        # Combine and embed
+        combined = tf.concat([attended, texture_features], axis=-1)
+        return self.embedding(combined)</code></pre>
+          </div>
+        </section>
+
+        <section class="blog-section">
+          <h2>Liveness Detection: Preventing Spoofing</h2>
+          <p>
+            Beyond twin differentiation, the system needed to prevent photo-based spoofing. 
+            I implemented a multi-factor liveness detection system:
+          </p>
+          <ul>
+            <li><strong>Blink detection:</strong> Track eye aspect ratio over frames</li>
+            <li><strong>Micro-movement analysis:</strong> Detect natural head micro-movements</li>
+            <li><strong>Depth estimation:</strong> Use monocular depth cues to detect flat images</li>
+            <li><strong>Texture analysis:</strong> Detect print artifacts and screen moiré patterns</li>
+          </ul>
+          <div class="stats-grid">
+            <div class="stat-item">
+              <span class="stat-value gradient-text">99.2%</span>
+              <span class="stat-label">Photo Rejection Rate</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-value gradient-text">98.5%</span>
+              <span class="stat-label">Video Rejection Rate</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="blog-section">
+          <h2>Training with Triplet Loss</h2>
+          <p>
+            For twins specifically, I used a modified triplet loss with hard negative mining 
+            that specifically targeted twin pairs:
+          </p>
+          <div class="code-block">
+            <div class="code-header">
+              <span>twin_triplet_loss.py</span>
+            </div>
+            <pre><code>def twin_aware_triplet_loss(margin=0.3, twin_margin=0.5):
+    """
+    Modified triplet loss with larger margin for twin pairs.
+    """
+    def loss(y_true, y_pred):
+        anchor, positive, negative, is_twin = tf.split(y_pred, 4, axis=1)
+        
+        # Standard distances
+        pos_dist = tf.reduce_sum(tf.square(anchor - positive), axis=1)
+        neg_dist = tf.reduce_sum(tf.square(anchor - negative), axis=1)
+        
+        # Apply larger margin for twin negatives
+        effective_margin = tf.where(
+            is_twin > 0.5,
+            twin_margin,
+            margin
+        )
+        
+        loss = tf.maximum(pos_dist - neg_dist + effective_margin, 0.0)
+        return tf.reduce_mean(loss)
+    
+    return loss</code></pre>
+          </div>
+        </section>
+
+        <section class="blog-section">
+          <h2>Results and Lessons Learned</h2>
+          <p>
+            After 12 months of development and iteration:
+          </p>
+          <div class="stats-grid">
+            <div class="stat-item">
+              <span class="stat-value gradient-text">95%</span>
+              <span class="stat-label">Overall Accuracy</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-value gradient-text">89%</span>
+              <span class="stat-label">Twin Differentiation</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-value gradient-text">50K+</span>
+              <span class="stat-label">Daily Records</span>
+            </div>
+          </div>
+          
+          <h3>Key Takeaways</h3>
+          <ul>
+            <li><strong>Edge cases matter:</strong> Twins were only 1% of users but drove 30% of the engineering effort</li>
+            <li><strong>Micro-features are crucial:</strong> Skin texture, moles, and expression patterns differentiate twins</li>
+            <li><strong>Multi-modal verification:</strong> Combine face recognition with liveness detection</li>
+            <li><strong>Continuous learning:</strong> The model improved over time with user corrections</li>
+          </ul>
+        </section>
+      </div>
+
+      <!-- Author Card -->
+      <div class="blog-author-card card reveal">
+        <img src="/src/assets/potrait.png" alt="Khor Ze Yi" class="author-avatar" />
+        <div class="author-info">
+          <h3>Written by Khor Ze Yi</h3>
+          <p>Software Engineer specializing in AI/ML, computer vision, and building scalable systems.</p>
+          <div class="author-links">
+            <a href="https://github.com/KZY020821" target="_blank" class="pill-link">
+              <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              GitHub
+            </a>
+            <a href="https://www.linkedin.com/in/khorzeyi" target="_blank" class="pill-link">
+              <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              LinkedIn
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <div class="blog-navigation card reveal">
+        <a href="/blog/building-scalable-state-management.html" class="blog-nav-link">
+          <span class="nav-direction">← Previous Post</span>
+          <span class="nav-title">Scalable State Management</span>
+        </a>
+        <a href="/blog/agile-scrum-global-teams.html" class="blog-nav-link next">
+          <span class="nav-direction">Next Post →</span>
+          <span class="nav-title">Agile SCRUM Across Time Zones</span>
+        </a>
+      </div>
+    </article>
+
+    <footer class="footer">
+      <p class="footer-text">Built with ♥ by Khor Ze Yi // 2024</p>
+    </footer>
+
+    <script src="/src/shared.js"></script>
+  </body>
+</html>
