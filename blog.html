@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dev Blog - Web Development, AI/ML & Software Engineering | Khor Ze Yi</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Technical blog by Khor Ze Yi covering React, Next.js, TanStack Query, Redux, TensorFlow, Python, Laravel, and software engineering best practices. Learn from real-world project experiences." />
+    <meta name="keywords" content="software engineering blog, web development blog, React tutorial, Next.js guide, TanStack Query, Redux state management, TensorFlow machine learning, Python programming, Laravel PHP, JavaScript TypeScript, frontend development, backend development, full stack developer, AI machine learning, computer vision, Agile SCRUM, remote work, CRM development" />
+    <meta name="author" content="Khor Ze Yi" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://kzy020821.github.io/blog.html" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://kzy020821.github.io/blog.html" />
+    <meta property="og:title" content="Dev Blog - Web Development, AI/ML & Software Engineering" />
+    <meta property="og:description" content="Technical blog covering React, Next.js, TensorFlow, Python, and software engineering best practices. Learn from real-world project experiences." />
+    <meta property="og:image" content="https://kzy020821.github.io/src/assets/potrait.png" />
+    <meta property="og:site_name" content="Khor Ze Yi - Software Engineer" />
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://kzy020821.github.io/blog.html" />
+    <meta name="twitter:title" content="Dev Blog - Web Development, AI/ML & Software Engineering" />
+    <meta name="twitter:description" content="Technical blog covering React, Next.js, TensorFlow, Python, and software engineering best practices." />
+    <meta name="twitter:image" content="https://kzy020821.github.io/src/assets/potrait.png" />
+    
+    <!-- Structured Data / JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Blog",
+      "name": "Khor Ze Yi Dev Blog",
+      "description": "Technical blog covering web development, AI/ML, and software engineering best practices",
+      "url": "https://kzy020821.github.io/blog.html",
+      "author": {
+        "@type": "Person",
+        "name": "Khor Ze Yi",
+        "url": "https://kzy020821.github.io",
+        "jobTitle": "Software Engineer",
+        "sameAs": [
+          "https://github.com/KZY020821",
+          "https://www.linkedin.com/in/khorzeyi"
+        ]
+      },
+      "blogPost": [
+        {
+          "@type": "BlogPosting",
+          "headline": "Building Scalable State Management with TanStack Query + Redux",
+          "url": "https://kzy020821.github.io/blog/building-scalable-state-management.html",
+          "datePublished": "2024-12-28"
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "Training a Face Recognition CNN That Can Differentiate Twins",
+          "url": "https://kzy020821.github.io/blog/face-recognition-cnn-twins.html",
+          "datePublished": "2024-12-15"
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "Working with Global Teams: Agile SCRUM Across Time Zones",
+          "url": "https://kzy020821.github.io/blog/agile-scrum-global-teams.html",
+          "datePublished": "2024-11-30"
+        }
+      ]
+    }
+    </script>
+    
+    <link rel="icon" type="image/x-icon" href="/src/assets/moji.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/src/shared.css" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="main-nav">
+      <div class="nav-container">
+        <a href="/" class="nav-logo gradient-text">KZY</a>
+        <div class="nav-links">
+          <a href="/" class="nav-link">Home</a>
+          <a href="/projects.html" class="nav-link">Projects</a>
+          <a href="/blog.html" class="nav-link active">Blog</a>
+        </div>
+        <button class="nav-toggle" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+      <a href="/" class="mobile-link">Home</a>
+      <a href="/projects.html" class="mobile-link">Projects</a>
+      <a href="/blog.html" class="mobile-link active">Blog</a>
+    </div>
+
+    <div class="portfolio-grid">
+      <!-- Page Header -->
+      <div class="card span-2 page-header-card reveal">
+        <div class="corner-decoration top-right"></div>
+        <div class="card-label">Portfolio // Blog</div>
+        <h1 class="page-title gradient-text">Dev Blog</h1>
+        <p class="page-subtitle">
+          Sharing my development journey, technical insights, lessons learned,
+          and tips from building real-world applications.
+        </p>
+      </div>
+
+      <!-- Blog Post 1 -->
+      <a
+        href="/blog/building-scalable-state-management.html"
+        class="card blog-card blog-card-link reveal"
+      >
+        <div class="blog-meta">
+          <span class="blog-date">December 28, 2024</span>
+          <span class="blog-category">Architecture</span>
+        </div>
+        <h2 class="blog-title">
+          Building Scalable State Management with TanStack Query + Redux
+        </h2>
+        <p class="blog-excerpt">
+          After migrating several enterprise applications from legacy systems,
+          I've developed a hybrid approach that combines the best of TanStack
+          Query for server state and Redux for complex client state. Here's how
+          this architecture eliminated redundant API calls and improved overall
+          application performance by 40%.
+        </p>
+        <div class="blog-tags">
+          <span class="tag">TanStack Query</span>
+          <span class="tag">Redux</span>
+          <span class="tag">React</span>
+        </div>
+        <div class="blog-read-more">
+          <span class="read-time">5 min read</span>
+          <span class="read-link">Read more →</span>
+        </div>
+      </a>
+
+      <!-- Blog Post 2 -->
+      <a
+        href="/blog/face-recognition-cnn-twins.html"
+        class="card blog-card blog-card-link reveal"
+      >
+        <div class="blog-meta">
+          <span class="blog-date">December 15, 2024</span>
+          <span class="blog-category">AI/ML</span>
+        </div>
+        <h2 class="blog-title">
+          Lessons from Training a Face Recognition CNN That Can Differentiate
+          Twins
+        </h2>
+        <p class="blog-excerpt">
+          During my 12-month R&D project building an AI-powered attendance
+          system, I faced the unique challenge of training a model that could
+          distinguish between identical twins. This post covers the data
+          augmentation strategies, model architecture decisions, and liveness
+          detection techniques that helped achieve 95% accuracy.
+        </p>
+        <div class="blog-tags">
+          <span class="tag">TensorFlow</span>
+          <span class="tag">Computer Vision</span>
+          <span class="tag">CNN</span>
+        </div>
+        <div class="blog-read-more">
+          <span class="read-time">8 min read</span>
+          <span class="read-link">Read more →</span>
+        </div>
+      </a>
+
+      <!-- Blog Post 3 -->
+      <a
+        href="/blog/agile-scrum-global-teams.html"
+        class="card blog-card blog-card-link reveal"
+      >
+        <div class="blog-meta">
+          <span class="blog-date">November 30, 2024</span>
+          <span class="blog-category">Best Practices</span>
+        </div>
+        <h2 class="blog-title">
+          Working with Global Teams: Agile SCRUM Across Time Zones
+        </h2>
+        <p class="blog-excerpt">
+          Collaborating with team members spread across different continents
+          presents unique challenges. I share practical tips for running
+          effective sprint calls, async communication strategies, and tools that
+          have helped me maintain productivity while working with distributed
+          teams.
+        </p>
+        <div class="blog-tags">
+          <span class="tag">Agile</span>
+          <span class="tag">Remote Work</span>
+          <span class="tag">Teamwork</span>
+        </div>
+        <div class="blog-read-more">
+          <span class="read-time">4 min read</span>
+          <span class="read-link">Read more →</span>
+        </div>
+      </a>
+
+      <!-- More Posts Coming Soon -->
+      <div class="card blog-card reveal">
+        <div class="coming-soon-content blog-coming-soon">
+          <div class="coming-soon-icon">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"
+              />
+            </svg>
+          </div>
+          <h3 class="coming-soon-title">More Posts Coming Soon</h3>
+          <p class="coming-soon-desc">
+            I'm actively writing about my development experiences. Check back
+            regularly for new insights on web development, AI/ML, and software
+            engineering best practices.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <p class="footer-text">Built with ♥ by Khor Ze Yi // 2024</p>
+    </footer>
+
+    <script src="/src/shared.js"></script>
+  </body>
+</html>
