@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>From Localhost to the Cloud: Deploying Full-Stack Next.js on AWS EC2 | Khor Ze Yi</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="A deep dive into the technical hurdles of deploying a Next.js 16 and Node.js CRUD application on AWS EC2, including solving memory constraints with swap files and managing Node versions with NVM." />
+    <meta name="keywords" content="Next.js, AWS EC2, Deployment, Node.js, Express, Swap File, NVM, DevOps, Full Stack Development, Cloud Hosting" />
+    <meta name="author" content="Khor Ze Yi" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://kzy020821.github.io/blog/deploying-node-nextjs-aws-ec2.html" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://kzy020821.github.io/blog/deploying-node-nextjs-aws-ec2.html" />
+    <meta property="og:title" content="From Localhost to the Cloud: Deploying Full-Stack Next.js on AWS EC2" />
+    <meta property="og:description" content="Overcoming memory limits and networking hurdles to host a modern full-stack application on a single EC2 instance." />
+    <meta property="og:image" content="https://kzy020821.github.io/src/assets/potrait.png" />
+    <meta property="og:site_name" content="Khor Ze Yi - Software Engineer" />
+    <meta property="article:author" content="Khor Ze Yi" />
+    <meta property="article:published_time" content="2026-02-07" />
+    
+    <link rel="icon" type="image/x-icon" href="/src/assets/moji.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/shared.css" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="main-nav">
+      <div class="nav-container">
+        <a href="/" class="nav-logo gradient-text">KZY</a>
+        <div class="nav-links">
+          <a href="/" class="nav-link">Home</a>
+          <a href="/projects.html" class="nav-link">Projects</a>
+          <a href="/blog.html" class="nav-link active">Blog</a>
+        </div>
+      </div>
+    </nav>
+
+    <article class="blog-post-container">
+      <!-- Back Button -->
+      <a href="/blog.html" class="back-to-blog">
+        <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+        Back to Blog
+      </a>
+
+      <!-- Header -->
+      <header class="blog-post-header card reveal">
+        <div class="blog-post-meta">
+          <span class="blog-date">February 7, 2026</span>
+          <span class="blog-category">DevOps</span>
+          <span class="read-time">6 min read</span>
+        </div>
+        <h1 class="blog-post-title gradient-text">From Localhost to the Cloud: Deploying Full-Stack Next.js on AWS EC2</h1>
+        <p class="blog-post-subtitle">
+          A story of overcoming memory limits, version conflicts, and networking puzzles to host a production-ready application on a single micro instance.
+        </p>
+        <div class="blog-post-tags">
+          <span class="tag">Next.js 16</span>
+          <span class="tag">AWS EC2</span>
+          <span class="tag">Node.js</span>
+          <span class="tag">Infrastructure</span>
+        </div>
+      </header>
+
+      <!-- Content -->
+      <div class="blog-post-content card reveal">
+        <section class="blog-section">
+          <h2>The "It Works on My Machine" Moment</h2>
+          <p>
+            We've all been there. The CRUD application is humming along perfectly on <code>localhost:3000</code>. The frontend is snappy, the backend is responsive, and every API call returns a satisfying 200 OK. But as every developer eventually learns, the real test begins when you try to move that code from the comfort of your MacBook to the wild frontier of a raw cloud server.
+          </p>
+          <p>
+            Today, I embarked on a journey to deploy a full-stack Next.js 16 and Node.js application onto a single <strong>AWS EC2 t2.micro</strong> instance. What seemed like a straightforward task quickly turned into a masterclass in resource management and cloud networking.
+          </p>
+        </section>
+
+        <section class="blog-section">
+          <h2>The First Wall: The Version Gap</h2>
+          <p>
+            After SSH-ing into the EC2 instance, I was greeted by the first hurdle: Node.js 18. While stable, modern frameworks like Next.js 16 demand at least v20.9.0. Instead of fighting the system package manager, I turned to <strong>NVM (Node Version Manager)</strong>.
+          </p>
+          <div class="code-block">
+            <div class="code-header"><span>Upgrading the Environment</span></div>
+            <pre><code>curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+source ~/.bashrc
+nvm install 20
+node -v # Success: v20.x.x</code></pre>
+          </div>
+        </section>
+
+        <section class="blog-section">
+          <h2>The Second Wall: The Memory Crash</h2>
+          <p>
+            With the correct Node version, I ran <code>npm run build</code>. Five minutes in, the terminal froze. <em>"Broken pipe."</em> The connection dropped.
+          </p>
+          <p>
+            The culprit? Next.js 16's build process is a resource hog, and the 1GB of RAM on a free-tier EC2 instance simply wasn't enough. The server was literally choking to death. To fix this, I had to trick the server into thinking it had more memory by creating a <strong>Swap File</strong>.
+          </p>
+          <div class="code-block">
+            <div class="code-header"><span>Creating Virtual RAM</span></div>
+            <pre><code># Create a 2GB swap file from thin air
+sudo dd if=/dev/zero of=/swapfile bs=128M count=16
+sudo chmod 600 /swapfile
+sudo mkswap /swapfile
+sudo swapon /swapfile</code></pre>
+          </div>
+          <p>
+            With this "virtual breathing room," the build process completed successfully.
+          </p>
+        </section>
+
+        <section class="blog-section">
+          <h2>The Final Puzzle: Networking & Security</h2>
+          <p>
+            The app was built, but it was invisible to the world. I had to orchestrate two separate processes running in the background:
+          </p>
+          <ul>
+            <li><strong>Backend:</strong> Express on Port 3000</li>
+            <li><strong>Frontend:</strong> Next.js on Port 3001</li>
+          </ul>
+          <p>
+            I used <code>nohup</code> to ensure they kept running even after I disconnected. But even then, the browser showed "Failed to connect." This led me to the <strong>AWS Security Group</strong> dashboard, where I had to manually punch holes in the firewall to allow traffic through those specific ports.
+          </p>
+        </section>
+
+        <section class="blog-section">
+          <h2>The Architecture of Success</h2>
+          <div class="stats-grid">
+            <div class="stat-item">
+              <span class="stat-value gradient-text">3000</span>
+              <span class="stat-label">API Port</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-value gradient-text">3001</span>
+              <span class="stat-label">Web Port</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-value gradient-text">2GB</span>
+              <span class="stat-label">Swap Added</span>
+            </div>
+          </div>
+          <p>
+            The result? A fully functional, production-ready environment running on the humblest of cloud hardware. This journey reminded me that deployment isn't just about moving files—it's about understanding the environment and the constraints of the hardware you're working with.
+          </p>
+        </section>
+      </div>
+
+      <!-- Author Card -->
+      <div class="blog-author-card card reveal">
+        <img src="/src/assets/potrait.png" alt="Khor Ze Yi" class="author-avatar" />
+        <div class="author-info">
+          <h3>Written by Khor Ze Yi</h3>
+          <p>Software Engineer specialized in building and deploying scalable web applications.</p>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <div class="blog-navigation card reveal">
+        <a href="/blog.html" class="blog-nav-link">
+          <span class="nav-direction">← Back to</span>
+          <span class="nav-title">All Posts</span>
+        </a>
+      </div>
+    </article>
+
+    <footer class="footer">
+      <p class="footer-text">Built with ♥ by Khor Ze Yi // 2026</p>
+    </footer>
+
+    <script src="/src/shared.js"></script>
+  </body>
+</html>
