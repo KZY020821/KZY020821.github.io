@@ -4,29 +4,40 @@
  * ============================================
  * This is the main stylesheet for the portfolio.
  * Maintains consistent UI across all pages.
- * 
+ *
  * Design System:
- * - Neumorphic / Soft UI aesthetic
- * - Vaporwave color palette
+ * - Dark Glassmorphism aesthetic
+ * - Vaporwave color palette on dark canvas
  * - Outfit font for headings, Space Mono for labels
  * ============================================
  */
 
 /* ============================================
-   CSS VARIABLES - DESIGN TOKENS
+   CSS VARIABLES - DESIGN TOKENS (DARK MODE)
    ============================================ */
 :root {
-  --alabaster: #fcfcfd;
-  --alabaster-shadow: #d1d9e6;
-  --alabaster-light: #ffffff;
-  --bg-base: #e0e5ec;
-  --vw-pink: #ff71ce;
-  --vw-blue: #01cdfe;
+  /* Surface colours */
+  --bg-base:          #080810;
+  --card-bg:          rgba(255, 255, 255, 0.04);
+  --card-bg-hover:    rgba(255, 255, 255, 0.07);
+  --card-border:      rgba(255, 255, 255, 0.08);
+  --card-border-hover:rgba(185, 103, 255, 0.35);
+
+  /* Legacy aliases kept so existing rules still compile */
+  --alabaster:        #12121e;
+  --alabaster-shadow: rgba(0, 0, 0, 0.5);
+  --alabaster-light:  rgba(255, 255, 255, 0.04);
+
+  /* Accent colours */
+  --vw-pink:   #ff71ce;
+  --vw-blue:   #01cdfe;
   --vw-purple: #b967ff;
-  --vw-mint: #037c4e;
-  --text-dark: #2d3436;
-  --text-muted: #636e72;
-  --text-light: #b2bec3;
+  --vw-mint:   #05ffa1;
+
+  /* Text */
+  --text-dark:  #f0f0f8;
+  --text-muted: #9a9ab0;
+  --text-light: #4a4a6a;
 }
 
 /* ============================================
@@ -45,18 +56,17 @@ html {
 
 body {
   background-color: var(--bg-base);
-  background-image: linear-gradient(
-      rgba(185, 103, 255, 0.04) 1px,
-      transparent 1px
-    ),
-    linear-gradient(90deg, rgba(185, 103, 255, 0.04) 1px, transparent 1px);
-  background-size: 50px 50px;
+  background-image:
+    linear-gradient(rgba(185, 103, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(185, 103, 255, 0.025) 1px, transparent 1px);
+  background-size: 60px 60px;
   font-family: "Outfit", sans-serif;
   min-height: 100vh;
   padding: 40px 20px;
   padding-top: 100px;
   position: relative;
   overflow-x: hidden;
+  color: var(--text-dark);
 }
 
 /* Ambient glow effects */
@@ -67,33 +77,18 @@ body::before {
   left: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(
-      circle at 30% 20%,
-      rgba(255, 113, 206, 0.08) 0%,
-      transparent 40%
-    ),
-    radial-gradient(
-      circle at 70% 80%,
-      rgba(1, 205, 254, 0.06) 0%,
-      transparent 40%
-    ),
-    radial-gradient(
-      circle at 50% 50%,
-      rgba(185, 103, 255, 0.05) 0%,
-      transparent 50%
-    );
+  background:
+    radial-gradient(circle at 20% 15%, rgba(185, 103, 255, 0.12) 0%, transparent 38%),
+    radial-gradient(circle at 80% 85%, rgba(1, 205, 254, 0.09) 0%, transparent 38%),
+    radial-gradient(circle at 55% 50%, rgba(255, 113, 206, 0.06) 0%, transparent 45%);
   pointer-events: none;
   z-index: 0;
   animation: ambient-drift 20s ease-in-out infinite alternate;
 }
 
 @keyframes ambient-drift {
-  0% {
-    transform: translate(-5%, -5%) rotate(0deg);
-  }
-  100% {
-    transform: translate(5%, 5%) rotate(3deg);
-  }
+  0%   { transform: translate(-5%, -5%) rotate(0deg); }
+  100% { transform: translate(5%, 5%) rotate(3deg); }
 }
 
 /* ============================================
@@ -106,10 +101,10 @@ body::before {
   right: 0;
   z-index: 1000;
   padding: 15px 20px;
-  background: rgba(224, 229, 236, 0.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  background: rgba(8, 8, 16, 0.82);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
 }
 
 .nav-container {
@@ -146,13 +141,13 @@ body::before {
 
 .nav-link:hover {
   color: var(--vw-purple);
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(185, 103, 255, 0.1);
 }
 
 .nav-link.active {
   color: white;
   background: linear-gradient(135deg, var(--vw-pink), var(--vw-purple));
-  box-shadow: 0 4px 15px rgba(185, 103, 255, 0.3);
+  box-shadow: 0 4px 20px rgba(185, 103, 255, 0.4);
 }
 
 .nav-toggle {
@@ -168,7 +163,7 @@ body::before {
 .nav-toggle span {
   width: 24px;
   height: 2px;
-  background: var(--text-dark);
+  background: var(--text-muted);
   border-radius: 2px;
   transition: all 0.3s ease;
 }
@@ -194,10 +189,10 @@ body::before {
   right: 0;
   z-index: 999;
   padding: 20px;
-  background: rgba(224, 229, 236, 0.95);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  background: rgba(8, 8, 16, 0.97);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
   flex-direction: column;
   gap: 10px;
   transform: translateY(-100%);
@@ -213,12 +208,12 @@ body::before {
 .mobile-link {
   padding: 15px 20px;
   text-decoration: none;
-  color: var(--text-dark);
+  color: var(--text-muted);
   font-family: "Space Mono", monospace;
   font-size: 14px;
   letter-spacing: 0.05em;
   border-radius: 15px;
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.04);
   transition: all 0.3s ease;
   text-align: center;
 }
@@ -260,15 +255,14 @@ body::before {
    BASE CARD STYLE
    ============================================ */
 .card {
-  background: var(--alabaster);
-  border-radius: 40px;
+  background: var(--card-bg);
+  border-radius: 28px;
   padding: 35px;
-  box-shadow: 20px 20px 60px var(--alabaster-shadow),
-    -20px -20px 60px var(--alabaster-light),
-    inset 2px 2px 5px rgba(255, 255, 255, 0.9),
-    inset -2px -2px 5px rgba(0, 0, 0, 0.02);
-  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1),
-    box-shadow 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  border: 1px solid var(--card-border);
+  box-shadow: 0 4px 40px rgba(0, 0, 0, 0.4);
+  transition: transform 0.45s cubic-bezier(0.23, 1, 0.32, 1),
+    border-color 0.45s ease,
+    box-shadow 0.45s cubic-bezier(0.23, 1, 0.32, 1);
   position: relative;
   overflow: hidden;
 }
@@ -282,12 +276,12 @@ body::before {
   bottom: 0;
   background: radial-gradient(
     circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    rgba(185, 103, 255, 0.03) 0%,
-    transparent 50%
+    rgba(185, 103, 255, 0.08) 0%,
+    transparent 55%
   );
   pointer-events: none;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.35s ease;
 }
 
 .card:hover::before {
@@ -295,7 +289,9 @@ body::before {
 }
 
 .card:hover {
-  transform: translateY(-5px) scale(1.01);
+  transform: translateY(-6px) scale(1.01);
+  border-color: var(--card-border-hover);
+  box-shadow: 0 8px 50px rgba(185, 103, 255, 0.15);
 }
 
 .card.span-2 {
@@ -328,7 +324,7 @@ body::before {
 
   .card {
     padding: 28px;
-    border-radius: 30px;
+    border-radius: 24px;
   }
 
   .card.span-2 {
@@ -350,7 +346,7 @@ body::before {
 
   .card {
     padding: 25px;
-    border-radius: 25px;
+    border-radius: 22px;
   }
 
   .card.span-2 {
@@ -371,11 +367,8 @@ body::before {
 
   .card {
     padding: 20px;
-    border-radius: 20px;
-    box-shadow: 10px 10px 30px var(--alabaster-shadow),
-      -10px -10px 30px var(--alabaster-light),
-      inset 2px 2px 5px rgba(255, 255, 255, 0.9),
-      inset -2px -2px 5px rgba(0, 0, 0, 0.02);
+    border-radius: 18px;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
   }
 
   body {
@@ -581,24 +574,23 @@ body::before {
   align-items: center;
   gap: 8px;
   padding: 12px 24px;
-  background: rgba(255, 255, 255, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 50px;
   text-decoration: none;
   color: var(--text-dark);
   font-family: "Space Mono", monospace;
   font-size: 12px;
   letter-spacing: 0.05em;
-  box-shadow: inset 4px 4px 8px rgba(209, 217, 230, 0.2),
-    inset -4px -4px 8px rgba(255, 255, 255, 0.7);
   transition: all 0.3s ease;
 }
 
 .pill-link:hover {
   background: linear-gradient(135deg, var(--vw-pink), var(--vw-purple));
   color: white;
+  border-color: transparent;
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(185, 103, 255, 0.3);
+  box-shadow: 0 8px 25px rgba(185, 103, 255, 0.4);
 }
 
 .pill-link svg {
@@ -757,20 +749,18 @@ body::before {
   align-items: center;
   gap: 10px;
   padding: 20px 10px;
-  background: rgba(255, 255, 255, 0.4);
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  box-shadow: inset 3px 3px 6px rgba(209, 217, 230, 0.25),
-    inset -3px -3px 6px rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
   transition: all 0.3s ease;
   cursor: default;
 }
 
 .skill-item:hover {
   transform: translateY(-5px) scale(1.05);
-  box-shadow: 0 10px 30px rgba(185, 103, 255, 0.15),
-    inset 3px 3px 6px rgba(209, 217, 230, 0.25),
-    inset -3px -3px 6px rgba(255, 255, 255, 0.7);
+  border-color: rgba(185, 103, 255, 0.4);
+  box-shadow: 0 8px 25px rgba(185, 103, 255, 0.18);
+  background: rgba(185, 103, 255, 0.07);
 }
 
 .skill-icon {
@@ -850,9 +840,10 @@ body::before {
 .exp-date {
   font-family: "Space Mono", monospace;
   font-size: 12px;
-  color: var(--text-light);
+  color: var(--text-muted);
   padding: 6px 14px;
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 20px;
 }
 
@@ -889,13 +880,12 @@ body::before {
 
 .tech-tag {
   padding: 5px 12px;
-  background: var(--bg-base);
+  background: rgba(185, 103, 255, 0.1);
   border-radius: 15px;
+  border: 1px solid rgba(185, 103, 255, 0.2);
   font-family: "Space Mono", monospace;
   font-size: 11px;
-  color: var(--text-dark);
-  box-shadow: 2px 2px 5px var(--alabaster-shadow),
-    -2px -2px 5px var(--alabaster-light);
+  color: var(--vw-purple);
 }
 
 /* Card content responsive */
@@ -1106,20 +1096,17 @@ body::before {
   align-items: center;
   gap: 15px;
   padding: 18px 22px;
-  background: rgba(255, 255, 255, 0.4);
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
   text-decoration: none;
   color: var(--text-dark);
   transition: all 0.3s ease;
 }
 
 .quick-link-item:hover {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 113, 206, 0.1),
-    rgba(185, 103, 255, 0.1)
-  );
+  background: rgba(185, 103, 255, 0.1);
+  border-color: rgba(185, 103, 255, 0.3);
   transform: translateX(5px);
 }
 
@@ -1182,9 +1169,9 @@ body::before {
   align-items: center;
   gap: 15px;
   padding: 15px 20px;
-  background: rgba(255, 255, 255, 0.4);
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
   text-decoration: none;
   color: var(--text-dark);
   transition: all 0.3s ease;
@@ -1192,11 +1179,8 @@ body::before {
 }
 
 .contact-item:hover {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 113, 206, 0.1),
-    rgba(185, 103, 255, 0.1)
-  );
+  background: rgba(185, 103, 255, 0.1);
+  border-color: rgba(185, 103, 255, 0.3);
   transform: translateX(5px);
 }
 
@@ -1237,20 +1221,19 @@ body::before {
 
 .copy-btn {
   padding: 8px 16px;
-  background: var(--bg-base);
-  border: none;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 15px;
   font-family: "Space Mono", monospace;
   font-size: 10px;
   color: var(--text-muted);
   cursor: pointer;
-  box-shadow: 2px 2px 5px var(--alabaster-shadow),
-    -2px -2px 5px var(--alabaster-light);
   transition: all 0.3s ease;
 }
 
 .copy-btn:hover {
   color: var(--vw-purple);
+  border-color: rgba(185, 103, 255, 0.4);
 }
 
 .copy-btn.copied {
@@ -1267,8 +1250,8 @@ body::before {
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  border: 20px solid var(--alabaster-shadow);
-  opacity: 0.15;
+  border: 20px solid rgba(185, 103, 255, 0.15);
+  opacity: 0.5;
   pointer-events: none;
 }
 
@@ -1527,9 +1510,8 @@ body::before {
   margin-top: 20px;
   border-radius: 20px;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.4);
-  box-shadow: inset 4px 4px 10px rgba(209, 217, 230, 0.4),
-    inset -4px -4px 10px rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
 }
 
 .carousel-track {
@@ -1629,12 +1611,11 @@ body::before {
 
 .tabs {
   display: inline-flex;
-  background: rgba(224, 229, 236, 0.5);
+  background: rgba(255, 255, 255, 0.05);
   padding: 4px;
   border-radius: 14px;
   position: relative;
-  box-shadow: inset 2px 2px 5px var(--alabaster-shadow),
-    inset -2px -2px 5px var(--alabaster-light);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .tab {
@@ -1687,7 +1668,7 @@ body::before {
    ============================================ */
 .carousel-slide {
   position: relative;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.02);
   overflow: hidden;
 }
 
@@ -1701,10 +1682,10 @@ body::before {
   transform: translateX(-100%);
   background-image: linear-gradient(
     90deg,
-    rgba(255, 255, 255, 0) 0,
-    rgba(255, 255, 255, 0.05) 20%,
-    rgba(255, 255, 255, 0.1) 60%,
-    rgba(255, 255, 255, 0)
+    transparent 0,
+    rgba(185, 103, 255, 0.06) 30%,
+    rgba(185, 103, 255, 0.1) 60%,
+    transparent
   );
   animation: shimmer 2s infinite;
 }
@@ -1994,6 +1975,10 @@ body::before {
   font-size: 22px;
   color: var(--text-dark);
   margin-bottom: 15px;
+  background: linear-gradient(135deg, var(--vw-pink), var(--vw-purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .coming-soon-desc {
@@ -2039,9 +2024,10 @@ body::before {
 .blog-title {
   font-weight: 700;
   font-size: 20px;
-  color: var(--text-dark);
+  color: #e8e8f5;
   margin-bottom: 15px;
   line-height: 1.4;
+  transition: color 0.3s ease;
 }
 
 .blog-excerpt {
@@ -2126,7 +2112,10 @@ body::before {
 }
 
 .blog-card-link:hover .blog-title {
-  color: var(--vw-purple);
+  background: linear-gradient(135deg, var(--vw-pink), var(--vw-purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .blog-card-link .read-link {
@@ -2282,8 +2271,9 @@ body::before {
   margin: 25px 0;
   border-radius: 15px;
   overflow: hidden;
-  background: #1e1e2e;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  background: #0d0d1a;
+  border: 1px solid rgba(185, 103, 255, 0.15);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
 .code-header {
@@ -2314,10 +2304,11 @@ body::before {
   margin: 25px 0;
   background: linear-gradient(
     135deg,
-    rgba(255, 113, 206, 0.1),
-    rgba(185, 103, 255, 0.1)
+    rgba(255, 113, 206, 0.06),
+    rgba(185, 103, 255, 0.06)
   );
   border-radius: 20px;
+  border: 1px solid rgba(185, 103, 255, 0.2);
   border-left: 4px solid var(--vw-purple);
 }
 
@@ -2347,9 +2338,9 @@ body::before {
 .stat-item {
   text-align: center;
   padding: 25px 15px;
-  background: rgba(255, 255, 255, 0.4);
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
 }
 
 .stat-value {
@@ -2382,7 +2373,7 @@ body::before {
   border-radius: 50%;
   object-fit: cover;
   border: 4px solid transparent;
-  background: linear-gradient(var(--alabaster), var(--alabaster)) padding-box,
+  background: linear-gradient(#12121e, #12121e) padding-box,
     linear-gradient(135deg, var(--vw-pink), var(--vw-purple)) border-box;
   flex-shrink: 0;
 }
@@ -2422,12 +2413,11 @@ body::before {
   flex-direction: column;
   gap: 5px;
   padding: 25px 30px;
-  background: var(--alabaster);
-  border-radius: 25px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   text-decoration: none;
   transition: all 0.3s ease;
-  box-shadow: 10px 10px 30px var(--alabaster-shadow),
-    -10px -10px 30px var(--alabaster-light);
 }
 
 .blog-nav-link:hover {
@@ -2555,5 +2545,229 @@ body::before {
 
   .nav-title {
     font-size: 14px;
+  }
+}
+
+/* ============================================
+   MAGIC UI — @property REGISTRATION
+   (Required for conic-gradient animation)
+   ============================================ */
+@property --beam-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+/* ============================================
+   MAGIC UI — BORDER BEAM
+   A conic-gradient beam that sweeps around
+   the border of the hero card infinitely.
+   Usage: add class="border-beam" to any .card
+   ============================================ */
+.border-beam {
+  position: relative;
+  /* Override the static border — beam handles it */
+  border-color: transparent !important;
+}
+
+.border-beam::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: conic-gradient(
+    from var(--beam-angle),
+    transparent 0%,
+    transparent 50%,
+    var(--vw-blue)   65%,
+    var(--vw-purple) 78%,
+    var(--vw-pink)   88%,
+    transparent      100%
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: beam-rotate 5s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes beam-rotate {
+  to { --beam-angle: 360deg; }
+}
+
+/* ============================================
+   MAGIC UI — ANIMATED GRADIENT TEXT
+   The .gradient-text class now flows its
+   gradient continuously instead of being static.
+   ============================================ */
+.gradient-text {
+  background: linear-gradient(
+    90deg,
+    var(--vw-pink)   0%,
+    var(--vw-purple) 30%,
+    var(--vw-blue)   60%,
+    var(--vw-pink)   100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient-flow 5s linear infinite;
+}
+
+@keyframes gradient-flow {
+  0%   { background-position: 0%   center; }
+  100% { background-position: 200% center; }
+}
+
+/* ============================================
+   MAGIC UI — SHIMMER BUTTON
+   A light-sweep shimmer on pill links & the
+   active nav link on hover.
+   ============================================ */
+.pill-link {
+  position: relative;
+  overflow: hidden;
+}
+
+.pill-link::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 45%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transform: skewX(-12deg);
+  pointer-events: none;
+}
+
+.pill-link:hover::after {
+  animation: shimmer-sweep 0.6s ease forwards;
+}
+
+.nav-link.active {
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 45%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.25),
+    transparent
+  );
+  transform: skewX(-12deg);
+  pointer-events: none;
+  animation: shimmer-sweep 2.5s ease infinite;
+  animation-delay: 1s;
+}
+
+@keyframes shimmer-sweep {
+  to { left: 160%; }
+}
+
+/* ============================================
+   MAGIC UI — METEORS
+   Diagonal glowing streaks across the background.
+   Created dynamically by JS.
+   ============================================ */
+.meteor-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.meteor {
+  position: absolute;
+  width: 1.5px;
+  height: 70px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(185, 103, 255, 0.9),
+    rgba(255, 113, 206, 0.5)
+  );
+  border-radius: 100px;
+  opacity: 0;
+  animation: meteor-fall linear forwards;
+}
+
+/* Bright head of the meteor */
+.meteor::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow:
+    0 0 6px  2px rgba(185, 103, 255, 0.9),
+    0 0 12px 4px rgba(185, 103, 255, 0.4);
+}
+
+@keyframes meteor-fall {
+  0% {
+    opacity: 0;
+    transform: rotate(220deg) translateX(0);
+  }
+  8%  { opacity: 1; }
+  85% { opacity: 0.7; }
+  100% {
+    opacity: 0;
+    transform: rotate(220deg) translateX(700px);
+  }
+}
+
+/* ============================================
+   MAGIC UI — SPARKLE GLOW on portrait ring
+   Extends the portrait animation with a subtle
+   sparkle/shimmer feel.
+   ============================================ */
+@keyframes portrait-glow {
+  0% {
+    box-shadow:
+      0 10px 40px rgba(255, 113, 206, 0.35),
+      inset 0 0 0 3px rgba(255, 255, 255, 0.15),
+      0 0 0 0 rgba(185, 103, 255, 0);
+  }
+  50% {
+    box-shadow:
+      0 10px 50px rgba(185, 103, 255, 0.5),
+      inset 0 0 0 3px rgba(255, 255, 255, 0.25),
+      0 0 25px 8px rgba(185, 103, 255, 0.12);
+  }
+  100% {
+    box-shadow:
+      0 10px 40px rgba(1, 205, 254, 0.35),
+      inset 0 0 0 3px rgba(255, 255, 255, 0.15),
+      0 0 0 0 rgba(1, 205, 254, 0);
   }
 }

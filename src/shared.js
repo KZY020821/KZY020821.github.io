@@ -517,18 +517,73 @@ function initHookFlowTabs(containerId = "hookflowTabs", isLightbox = false) {
   });
 }
 
+// ============================================
+// MAGIC UI — METEORS
+// Spawns diagonal glowing streaks across the
+// background at randomised intervals.
+// ============================================
+function initMeteors() {
+  const container = document.createElement('div');
+  container.className = 'meteor-container';
+  document.body.prepend(container);
+
+  const colorSets = [
+    ['rgba(185, 103, 255, 0.9)', 'rgba(255, 113, 206, 0.5)'],
+    ['rgba(1, 205, 254, 0.9)',   'rgba(185, 103, 255, 0.5)'],
+    ['rgba(255, 113, 206, 0.9)', 'rgba(185, 103, 255, 0.5)'],
+  ];
+
+  function spawnMeteor() {
+    const meteor = document.createElement('div');
+    meteor.className = 'meteor';
+
+    const startX    = Math.random() * 120 - 10;   // -10vw to 110vw
+    const startY    = Math.random() * 60  - 40;   // -40vh to 20vh
+    const duration  = (Math.random() * 1.8 + 1.0).toFixed(2); // 1–2.8s
+    const delay     = (Math.random() * 0.4).toFixed(2);
+    const height    = Math.floor(Math.random() * 50 + 50);     // 50–100px
+    const [c1, c2]  = colorSets[Math.floor(Math.random() * colorSets.length)];
+
+    meteor.style.cssText = `
+      left: ${startX}vw;
+      top: ${startY}vh;
+      height: ${height}px;
+      animation-duration: ${duration}s;
+      animation-delay: ${delay}s;
+      background: linear-gradient(to bottom, transparent, ${c1}, ${c2});
+    `;
+
+    container.appendChild(meteor);
+
+    // Clean up after animation ends
+    const lifetime = (parseFloat(duration) + parseFloat(delay)) * 1000 + 150;
+    setTimeout(() => meteor.remove(), lifetime);
+  }
+
+  // Initial burst so the screen isn't empty on load
+  for (let i = 0; i < 4; i++) {
+    setTimeout(spawnMeteor, i * 350);
+  }
+
+  // Ongoing spawns — keep ~5 meteors cycling
+  setInterval(spawnMeteor, 900);
+}
+
 // Global Init
 document.addEventListener("DOMContentLoaded", () => {
   // Initialize image load states
   initImageLoading();
-  
+
   // Initialize all carousels
   document.querySelectorAll(".project-carousel").forEach(initCarousel);
-  
+
   // Initialize specific project features
   initHookFlowTabs();
   initLightbox();
-  
+
+  // Magic UI — Meteors background effect
+  initMeteors();
+
   // Preload Android images if currently showing iOS (or vice versa)
   const androidImages = [
     "/src/assets/android-1.jpg",
@@ -544,7 +599,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "/src/assets/face5.webp",
     "/src/assets/face6.webp",
   ];
-  
+
   idlePreload([...androidImages, ...faceImages]);
 
   document.body.style.opacity = "1";
@@ -558,7 +613,7 @@ const mainNav = document.querySelector(".main-nav");
 if (mainNav) {
   window.addEventListener("scroll", () => {
     if (window.scrollY > 100) {
-      mainNav.style.boxShadow = "0 4px 20px rgba(0, 0, 0, 0.1)";
+      mainNav.style.boxShadow = "0 4px 30px rgba(185, 103, 255, 0.12), 0 1px 0 rgba(185, 103, 255, 0.15)";
     } else {
       mainNav.style.boxShadow = "none";
     }
