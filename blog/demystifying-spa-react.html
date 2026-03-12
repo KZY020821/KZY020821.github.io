@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Demystifying SPA: It's Not Just "One Page" (And Why React Feels So Fast) | Khor Ze Yi</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Understand what a Single Page Application (SPA) really is and the magic behind React's Virtual DOM and Reconciliation that makes web apps feel so fast." />
+    <meta name="keywords" content="React, SPA, Single Page Application, Virtual DOM, Frontend Development, Javascript, Web Development" />
+    <meta name="author" content="Khor Ze Yi" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://kzy020821.github.io/blog/demystifying-spa-react.html" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://kzy020821.github.io/blog/demystifying-spa-react.html" />
+    <meta property="og:title" content="Demystifying SPA: It's Not Just 'One Page'" />
+    <meta property="og:description" content="Discover the secret behind the 'snappy' feeling of modern web dev and how React's Virtual DOM actually works." />
+    <meta property="og:image" content="https://kzy020821.github.io/src/assets/potrait.png" />
+    <meta property="og:site_name" content="Khor Ze Yi - Software Engineer" />
+    <meta property="article:author" content="Khor Ze Yi" />
+    <meta property="article:published_time" content="2026-03-12" />
+    
+    <link rel="icon" type="image/x-icon" href="/src/assets/moji.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/shared.css" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="main-nav">
+      <div class="nav-container">
+        <a href="/" class="nav-logo gradient-text">KZY</a>
+        <div class="nav-links">
+          <a href="/" class="nav-link">Home</a>
+          <a href="/projects.html" class="nav-link">Projects</a>
+          <a href="/blog.html" class="nav-link active">Blog</a>
+        </div>
+      </div>
+    </nav>
+
+    <article class="blog-post-container">
+      <!-- Back Button -->
+      <a href="/blog.html" class="back-to-blog">
+        <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+        Back to Blog
+      </a>
+
+      <!-- Header -->
+      <header class="blog-post-header card reveal">
+        <div class="blog-post-meta">
+          <span class="blog-date">March 12, 2026</span>
+          <span class="blog-category">Frontend</span>
+          <span class="read-time">2 min read</span>
+        </div>
+        <h1 class="blog-post-title gradient-text">Demystifying SPA: It's Not Just "One Page" (And Why React Feels So Fast)</h1>
+        <p class="blog-post-subtitle">
+          If you are new to modern web development, you have probably heard the term SPA thrown around a lot. Here's what it actually means.
+        </p>
+        <div class="blog-post-tags">
+          <span class="tag">React</span>
+          <span class="tag">SPA</span>
+          <span class="tag">Frontend</span>
+        </div>
+      </header>
+
+      <!-- Content -->
+      <div class="blog-post-content card reveal">
+        <section class="blog-section">
+          <p>
+            If you are new to modern web development, you have probably heard the term SPA thrown around a lot. It stands for <strong>Single Page Application</strong>, and it is the secret sauce behind that "snappy" feeling you get when using websites built with React, Vue, or Angular.
+          </p>
+          <p>
+            However, when I first heard the term, I made a very common mistake. I thought SPA literally meant a website with just one page—like a long, scrolling landing page with lots of content.
+          </p>
+          <p><strong>Turns out, that isn't quite right.</strong></p>
+        </section>
+
+        <section class="blog-section">
+          <h2>It's About the Server, Not the Page Count</h2>
+          <p>
+            In the traditional web (often called Multi-Page Applications), every time you click a link, the browser sends a request to the server and downloads a brand new HTML file.
+          </p>
+          <p>
+            In a <strong>Single Page Application</strong>, the server only sends <strong>one HTML file</strong>—usually a barebones <code>index.html</code>—for the entire lifetime of the application.
+          </p>
+          <p>
+            So, if there is only one HTML file, how do you navigate to the "About" page or the "Dashboard"? This is where JavaScript frameworks like React come into play.
+          </p>
+        </section>
+
+        <section class="blog-section">
+          <h2>The Magic Happens in the Browser</h2>
+          <p>
+            Once that single HTML file loads, React wakes up and takes control of the page. It intercepts any navigation clicks and swaps out the content on the screen without asking the server for a new HTML page.
+          </p>
+          <p>
+            This brings us to the technical "wow" factor you mentioned: <strong>The Virtual DOM and Reconciliation.</strong>
+          </p>
+          <p>
+            If React had to rebuild the entire page every time you clicked a button, it would still be slow. Instead, React keeps a lightweight copy of your page in memory (the Virtual DOM). When data changes, React runs its <strong>reconciliation algorithm</strong>—it compares the new Virtual DOM with the old one to figure out exactly what changed.
+          </p>
+          <p>
+            Then, like a skilled surgeon, React updates only those specific elements in the actual DOM. It doesn't repaint the whole interface; it just fixes the part that moved.
+          </p>
+        </section>
+
+        <section class="blog-section">
+          <h2>Why It Feels "Snappy"</h2>
+          <p>This combination is why React apps feel so fast:</p>
+          <ol>
+            <li><strong>No Waiting:</strong> You aren't waiting for a new HTML file to download from the server every time you click a link.</li>
+            <li><strong>No Flickering:</strong> Because React only updates the necessary components, the page doesn't "flash" or reload; it just instantly updates the data on the screen.</li>
+          </ol>
+          <p>
+            So, next time you hear SPA, remember: It isn't about having just one screen of content. It is about having one <strong>entry point</strong> (the HTML file) and letting JavaScript handle the rest seamlessly.
+          </p>
+        </section>
+      </div>
+
+      <!-- Author Card -->
+      <div class="blog-author-card card reveal">
+        <img src="/src/assets/potrait.png" alt="Khor Ze Yi" class="author-avatar" />
+        <div class="author-info">
+          <h3>Written by Khor Ze Yi</h3>
+          <p>Software Engineer specialized in building and deploying scalable web applications.</p>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <div class="blog-navigation card reveal">
+        <a href="/blog.html" class="blog-nav-link">
+          <span class="nav-direction">← Back to</span>
+          <span class="nav-title">All Posts</span>
+        </a>
+      </div>
+    </article>
+
+    <footer class="footer">
+      <p class="footer-text">Built with ♥ by Khor Ze Yi // 2026</p>
+    </footer>
+
+    <script src="/src/shared.js"></script>
+  </body>
+</html>
