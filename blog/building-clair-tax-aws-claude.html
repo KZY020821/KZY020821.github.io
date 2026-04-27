@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>From Localhost to AWS: Building Clair Tax — and How Claude 10x'd My Productivity | Khor Ze Yi</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="A deep dive into building a Malaysian tax platform as a Next.js + Spring Boot + FastAPI monorepo deployed on AWS EC2, RDS, SQS, Lambda, and S3 — and how Claude AI changed what was possible for a solo developer." />
+    <meta name="keywords" content="Next.js, Spring Boot, FastAPI, AWS, Claude AI, OCR, SQS, Lambda, RDS, S3, FinTech, Malaysia, tax management, monorepo, Python, Java, TypeScript" />
+    <meta name="author" content="Khor Ze Yi" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://kzy020821.github.io/blog/building-clair-tax-aws-claude.html" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://kzy020821.github.io/blog/building-clair-tax-aws-claude.html" />
+    <meta property="og:title" content="From Localhost to AWS: Building Clair Tax — and How Claude 10x'd My Productivity" />
+    <meta property="og:description" content="A deep dive into building a Malaysian tax platform as a full AWS monorepo — and how AI pair programming changed what's possible for a solo developer." />
+    <meta property="og:image" content="https://kzy020821.github.io/src/assets/potrait.png" />
+    <meta property="og:site_name" content="Khor Ze Yi - Software Engineer" />
+    <meta property="article:author" content="Khor Ze Yi" />
+    <meta property="article:published_time" content="2026-04-19" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://kzy020821.github.io/blog/building-clair-tax-aws-claude.html" />
+    <meta name="twitter:title" content="From Localhost to AWS: Building Clair Tax — and How Claude 10x'd My Productivity" />
+    <meta name="twitter:description" content="A deep dive into building a Malaysian tax platform as a full AWS monorepo — and how AI pair programming changed what's possible for a solo developer." />
+    <meta name="twitter:image" content="https://kzy020821.github.io/src/assets/potrait.png" />
+
+    <link rel="icon" type="image/x-icon" href="/src/assets/moji.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/shared.css" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="main-nav">
+      <div class="nav-container">
+        <a href="/" class="nav-logo gradient-text">KZY</a>
+        <div class="nav-links">
+          <a href="/" class="nav-link">Home</a>
+          <a href="/projects.html" class="nav-link">Projects</a>
+          <a href="/blog.html" class="nav-link active">Blog</a>
+        </div>
+        <button class="nav-toggle" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+      <a href="/" class="mobile-link">Home</a>
+      <a href="/projects.html" class="mobile-link">Projects</a>
+      <a href="/blog.html" class="mobile-link active">Blog</a>
+    </div>
+
+    <article class="blog-post-container">
+      <!-- Back Button -->
+      <a href="/blog.html" class="back-to-blog">
+        <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+        Back to Blog
+      </a>
+
+      <!-- Header -->
+      <header class="blog-post-header card reveal">
+        <div class="blog-post-meta">
+          <span class="blog-date">April 19, 2026</span>
+          <span class="blog-category">AWS · FinTech</span>
+          <span class="read-time">13 min read</span>
+        </div>
+        <h1 class="blog-post-title gradient-text">From Localhost to AWS: Building Clair Tax — and How Claude 10x'd My Productivity</h1>
+        <p class="blog-post-subtitle">
+          A deep dive into building a Malaysian tax platform as a full AWS monorepo — and how AI pair programming changed what's possible for a solo developer.
+        </p>
+        <div class="blog-post-tags">
+          <span class="tag">Next.js</span>
+          <span class="tag">Spring Boot</span>
+          <span class="tag">FastAPI</span>
+          <span class="tag">AWS</span>
+          <span class="tag">Claude AI</span>
+          <span class="tag">OCR</span>
+        </div>
+      </header>
+
+      <!-- Content -->
+      <div class="blog-post-content card reveal">
+
+        <!-- Section 1 -->
+        <section class="blog-section">
+          <h2>The Problem Worth Solving</h2>
+          <p>
+            Every year, millions of Malaysians file their income tax returns through LHDN (Lembaga Hasil Dalam Negeri).
+            The process is painful. There are over 12 relief categories — medical expenses, lifestyle purchases, education fees,
+            EPF contributions, life insurance, and more — each with their own annual caps and eligibility rules.
+          </p>
+          <p>
+            Most people handle this by hoarding physical receipts in a shoebox, frantically categorising them in March,
+            and making rough guesses about how much relief they can claim. The result is either leaving money on the table
+            or overclaiming and risking an audit.
+          </p>
+          <p>
+            The idea behind <strong>Clair Tax</strong> was simple: scan your receipts throughout the year, let the system
+            categorise them, and get a live tax estimate at any point. Receipts in, tax position out.
+          </p>
+          <p>
+            What started as a weekend side project grew into a proper full-stack system with a 3-service monorepo deployed
+            on AWS. This post covers the architecture, the deployment gaps that surprised me, and — the part I'm most excited
+            to share — how Claude AI fundamentally changed the velocity of what a solo developer can ship.
+          </p>
+        </section>
+
+        <!-- Section 2 -->
+        <section class="blog-section">
+          <h2>Choosing the Stack — And Why</h2>
+          <p>
+            Every framework choice in Clair Tax was deliberate. Here's the reasoning behind each one.
+          </p>
+          <ul>
+            <li>
+              <strong>Next.js (Frontend):</strong> The tax dashboard needs to display a real-time tax estimate that updates
+              as receipts are processed. SSR matters here — when a user shares their dashboard link, the estimate should
+              be pre-rendered on the server, not a blank loading spinner.
+            </li>
+            <li>
+              <strong>Spring Boot (Backend API):</strong> I chose Spring Boot over NestJS for two reasons. First, the Java
+              ecosystem's JPA/Hibernate support for complex relational data (tax reliefs have a deeply nested parent-child
+              structure) is mature and well-documented. Second, frankly: Spring Boot appears on more Malaysian enterprise
+              job postings than any Node.js framework, and building with it deepens a skill set that's directly marketable.
+            </li>
+            <li>
+              <strong>FastAPI (AI Service):</strong> OCR is inherently I/O-bound and compute-heavy. FastAPI's async-native
+              design lets you run multiple image-processing tasks concurrently without blocking the event loop. Pydantic's
+              strict type validation is invaluable when your input (OCR output) is unpredictable — amounts can be strings,
+              floats, or malformed entirely.
+            </li>
+            <li>
+              <strong>PostgreSQL on RDS:</strong> Tax data is relational: one user has many receipts, each receipt has many
+              line items, each line item maps to a relief category with year-specific caps. A document store would require
+              application-level joins. PostgreSQL on RDS gives you managed backups, automated patching, and Multi-AZ failover
+              without running your own database server.
+            </li>
+            <li>
+              <strong>SQS + Lambda:</strong> The OCR pipeline takes 2–3 seconds per receipt. If you process that synchronously
+              inside the HTTP request cycle, every receipt upload blocks a Spring Boot thread for 3 seconds. On a t3.medium
+              with Tomcat's default 200 threads, you'd exhaust the thread pool under moderate load. SQS decouples the upload
+              from the processing — the API returns in under 200ms, and Lambda handles the heavy lifting asynchronously.
+            </li>
+          </ul>
+        </section>
+
+        <!-- Section 3: Architecture -->
+        <section class="blog-section">
+          <h2>The Architecture</h2>
+          <p>
+            Before diving into the code, here's the full system at a glance. Every hop in this diagram was a deliberate
+            design decision — not an accident of "I'll add it later."
+          </p>
+
+          <div class="code-block">
+            <div class="code-header"><span>Clair Tax — AWS Architecture</span></div>
+            <pre><code>                       CLAIR TAX — AWS ARCHITECTURE
+┌──────────────────────────────────────────────────────────────────────┐
+│                                                                      │
+│   Browser / Mobile                                                   │
+│       │                                                              │
+│       ▼                                                              │
+│   ┌─────────────┐                                                    │
+│   │  CloudFront │  (CDN + HTTPS termination)                        │
+│   └──────┬──────┘                                                    │
+│          ▼                                                            │
+│   ┌─────────────┐                                                    │
+│   │     ALB     │  (Application Load Balancer)                      │
+│   └──────┬──────┘                                                    │
+│          ▼                                                            │
+│   ┌────────────────────────────────────────┐                        │
+│   │            EC2  t3.medium              │                        │
+│   │  ┌──────────────┐  ┌────────────────┐ │                        │
+│   │  │  Next.js     │→ │  Spring Boot   │ │                        │
+│   │  │  (Port 3000) │  │  REST API      │ │                        │
+│   │  └──────────────┘  └───────┬────────┘ │                        │
+│   └──────────────────────────┬─┘──────────┘                        │
+│                    ┌─────────┘                                        │
+│          ┌─────────▼────────┐      ┌─────────────┐                 │
+│          │  RDS PostgreSQL  │      │   AWS SQS   │                 │
+│          │  (users, tax     │      │  (OCR jobs  │                 │
+│          │   data, reliefs) │      │   queue)    │                 │
+│          └──────────────────┘      └──────┬──────┘                 │
+│                                           ▼                         │
+│                                  ┌─────────────────┐               │
+│                                  │   AWS Lambda    │               │
+│                                  │  (SQS consumer) │               │
+│                                  └────────┬────────┘               │
+│                                           │                         │
+│                           ┌───────────────┴──────────┐             │
+│                           ▼                          ▼              │
+│                   ┌──────────────┐        ┌────────────────┐       │
+│                   │  FastAPI     │        │    AWS S3      │       │
+│                   │  AI Service  │        │  (Receipt img  │       │
+│                   │  OCR Engine  │        │   storage)     │       │
+│                   └──────────────┘        └────────────────┘       │
+└──────────────────────────────────────────────────────────────────────┘
+
+  ① User uploads receipt → Spring Boot generates S3 pre-signed URL
+  ② Browser uploads image directly to S3 (bypasses EC2)
+  ③ Spring Boot enqueues SQS message { userId, s3Key, receiptId }
+  ④ Lambda polls SQS → calls FastAPI /extract with S3 key
+  ⑤ FastAPI downloads image, runs OCR, returns structured JSON
+  ⑥ Lambda writes line items to RDS via Spring Boot internal API
+  ⑦ Frontend polls receipt status → renders extracted deduction items</code></pre>
+          </div>
+
+          <p>
+            A few things worth calling out. The browser uploads directly to S3 via a pre-signed URL — the image never
+            passes through EC2, which keeps the instance's network I/O low and eliminates a potential bottleneck.
+            The Lambda function is the only component that talks to FastAPI, meaning the OCR service is never exposed
+            to the public internet.
+          </p>
+        </section>
+
+        <!-- Section 4 -->
+        <section class="blog-section">
+          <h2>Local Development to AWS: The Painful Gaps</h2>
+          <p>
+            Getting this running locally is one thing. Getting it running correctly on AWS is another. Here are the gaps
+            that cost me the most time.
+          </p>
+
+          <h3>Docker Compose + LocalStack</h3>
+          <p>
+            In development, I used <strong>LocalStack</strong> to emulate AWS SQS and S3 locally. This lets you run
+            <code>aws sqs send-message</code> and <code>aws s3 cp</code> against <code>localhost:4566</code> without
+            incurring AWS costs or needing a live AWS environment. The catch: LocalStack doesn't emulate Lambda triggers,
+            so I ran the Lambda consumer as a standalone polling script locally.
+          </p>
+
+          <h3>Secrets Management</h3>
+          <p>
+            Spring Boot's <code>application-prod.properties</code> file holds the RDS connection string, credentials,
+            and SQS queue URLs. In production, these values are fetched at startup from <strong>AWS Secrets Manager</strong>
+            using the Spring Cloud AWS Secrets Manager integration. Never hardcode credentials — not even in a private repo.
+          </p>
+
+          <h3>EC2 Bootstrap</h3>
+          <p>
+            The EC2 instance uses a <strong>user data script</strong> that runs on first launch. It installs Java 21,
+            Node 20, PM2 (for keeping Next.js alive), and pulls the latest monorepo build from S3. PM2 handles
+            automatic restarts if either process crashes.
+          </p>
+
+          <h3>Security Groups — The Gotcha</h3>
+          <p>
+            This tripped me up early. My initial Security Group allowed port 8080 (Spring Boot) open to
+            <code>0.0.0.0/0</code>. That means anyone on the internet could call your API directly, bypassing the ALB
+            and any WAF rules you've set up. The correct rule: port 8080 should only accept inbound traffic from the
+            ALB's Security Group ID — not from the world. (More on how Claude caught this below.)
+          </p>
+
+          <h3>IAM Roles</h3>
+          <p>
+            Two IAM roles are needed. The <strong>EC2 instance role</strong> gets <code>sqs:SendMessage</code> and
+            <code>s3:PutObject</code> (to enqueue jobs and generate pre-signed upload URLs). The
+            <strong>Lambda execution role</strong> gets <code>sqs:ReceiveMessage</code>, <code>sqs:DeleteMessage</code>,
+            <code>sqs:GetQueueAttributes</code>, and permission to call the FastAPI service's VPC endpoint.
+            Missing <code>sqs:GetQueueAttributes</code> causes a silent failure — Lambda won't tell you why it can't
+            attach to the trigger; it just won't attach.
+          </p>
+        </section>
+
+        <!-- Section 5 -->
+        <section class="blog-section">
+          <h2>Building the OCR Pipeline</h2>
+          <p>
+            The OCR pipeline is the most technically interesting part of the system. Here's the full flow from a
+            user clicking "Upload Receipt" to seeing extracted line items on screen.
+          </p>
+          <ol>
+            <li>
+              <strong>Upload initiation:</strong> The Next.js frontend calls <code>POST /api/receipts/upload-url</code>
+              on Spring Boot. Spring Boot generates an S3 pre-signed URL (valid for 5 minutes) and returns it along
+              with a new <code>receiptId</code>. The receipt row is created in RDS with status <code>PENDING</code>.
+            </li>
+            <li>
+              <strong>Direct S3 upload:</strong> The browser uploads the image directly to S3 using the pre-signed URL.
+              No image data passes through EC2.
+            </li>
+            <li>
+              <strong>SQS enqueue:</strong> After the S3 upload succeeds, the frontend calls
+              <code>POST /api/receipts/{id}/process</code>. Spring Boot enqueues a message:
+              <code>&#123; "userId": "...", "s3Key": "...", "receiptId": "..." &#125;</code>
+              and returns HTTP 202 Accepted immediately. API response time: under 200ms.
+            </li>
+            <li>
+              <strong>Lambda consumption:</strong> Lambda polls the SQS queue and calls FastAPI's
+              <code>POST /extract</code> endpoint with the S3 key. FastAPI downloads the image, runs the
+              OpenCV pre-processing pipeline, executes Tesseract OCR, and returns structured JSON.
+            </li>
+            <li>
+              <strong>Result persistence:</strong> Lambda calls Spring Boot's internal
+              <code>POST /internal/receipts/{id}/line-items</code> endpoint to write the extracted items to RDS.
+              The receipt status is updated to <code>PROCESSED</code> or <code>FAILED</code>.
+            </li>
+            <li>
+              <strong>Frontend polling:</strong> The Next.js UI polls <code>GET /api/receipts/{id}/status</code>
+              every 3 seconds until the status changes from <code>PENDING</code>. When it does, it fetches and
+              renders the extracted line items.
+            </li>
+          </ol>
+
+          <p>
+            Failed extractions are routed to a <strong>Dead Letter Queue (DLQ)</strong>. A CloudWatch alarm fires
+            if the DLQ depth exceeds zero, which triggers an SNS email notification.
+          </p>
+        </section>
+
+        <!-- Section 6: Claude -->
+        <section class="blog-section">
+          <h2>How Claude 10x'd My Productivity</h2>
+          <p>
+            I kept a rough log of what Claude helped me build across this project. By the end I counted 14 distinct
+            subsystems where I used it as a pair programmer — not a code generator I blindly copy-pasted from, but a
+            collaborator I could interrogate, push back on, and ask "why" questions of. Here are the five that made
+            the biggest difference.
+          </p>
+
+          <h3>1. Spring Boot JPA Entity Mappings</h3>
+          <p>
+            Malaysian tax reliefs have a complex nested structure: a parent relief category (e.g. "Medical")
+            contains child relief items (e.g. "Medical examination fees"), each with year-specific claim caps and
+            eligibility rules. Modelling this correctly in JPA — with the right cascade types, fetch strategies,
+            and orphan removal settings — would have taken me a long-form dive into Hibernate docs.
+          </p>
+          <p>
+            Instead, I described the entity relationships to Claude and asked it to generate the full
+            <code>@OneToMany</code> / <code>@ManyToOne</code> graph with validation annotations. It did, and it
+            explained each cascade choice. What would have taken 45 minutes took 3. More importantly, I understood
+            the output well enough to extend it when requirements changed.
+          </p>
+
+          <h3>2. FastAPI Pydantic Response Models</h3>
+          <p>
+            OCR output is inherently unpredictable. A receipt total might come back as <code>"RM 45.00"</code>,
+            <code>"45.0"</code>, <code>45</code>, or — for handwritten receipts — something completely malformed.
+            Claude helped me design a Pydantic model with <code>Optional</code> fields, custom <code>validator</code>
+            decorators that attempt multiple parsing strategies for amounts, and a <code>confidence_score</code> field
+            that downstream code can use to decide whether to auto-accept or flag for manual review.
+          </p>
+          <p>
+            We iterated on this model three times as I encountered edge cases: handwritten receipts,
+            dual-language receipts (Bahasa Malaysia / English), and receipts where the total was printed in a
+            non-standard position. Each iteration took minutes, not hours.
+          </p>
+
+          <h3>3. The Lambda SQS Handler</h3>
+          <p>
+            Lambda's SQS integration has a subtle but critical behaviour: if your handler throws an exception,
+            the entire batch is retried — including messages that succeeded. The correct pattern is to catch
+            per-message failures and return them in a <code>batchItemFailures</code> array, so only the failed
+            messages are retried.
+          </p>
+          <p>
+            Claude wrote the initial handler structure, including the retry logic and the
+            <code>batchItemFailures</code> pattern, and explained why naive exception propagation causes
+            duplicate processing. Here's the core of what it produced:
+          </p>
+
+          <div class="code-block">
+            <div class="code-header"><span>lambda_handler.py</span></div>
+            <pre><code>import json
+import logging
+
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
+
+def handler(event, context):
+    batch_item_failures = []
+
+    for record in event["Records"]:
+        receipt_id = None
+        try:
+            body = json.loads(record["body"])
+            receipt_id = body["receiptId"]
+            s3_key = body["s3Key"]
+
+            # Download from S3 and run OCR via FastAPI
+            result = ocr_service.extract(s3_key)
+
+            # Write extracted line items back to RDS via Spring Boot
+            spring_api.post_line_items(receipt_id, result)
+
+        except Exception as e:
+            logger.error(f"Failed to process receipt {receipt_id}: {e}")
+            # Only failed messages go back to the queue — not the whole batch
+            batch_item_failures.append(
+                {"itemIdentifier": record["messageId"]}
+            )
+
+    return {"batchItemFailures": batch_item_failures}</code></pre>
+          </div>
+
+          <h3>4. Security Group Review — The Misconfiguration Claude Caught</h3>
+          <p>
+            I pasted my Security Group configuration into Claude and asked: "What's wrong with this from a
+            least-privilege perspective?" It flagged something I'd missed: EC2 port 8080 was open to
+            <code>0.0.0.0/0</code> — the entire internet — rather than scoped to the ALB's Security Group ID.
+          </p>
+
+          <div class="highlight-box">
+            <h4>The fix</h4>
+            <p>
+              Change the inbound rule for port 8080 from source <code>0.0.0.0/0</code> to source
+              <code>sg-xxxxxxxx</code> (your ALB's Security Group ID). This ensures that only traffic routed
+              through the load balancer can reach the Spring Boot API — external scanners and bots cannot call
+              it directly.
+            </p>
+          </div>
+
+          <p>
+            This was a real misconfiguration that would have exposed the Spring Boot API to the public internet.
+            A security audit would have caught it eventually. Claude caught it in 30 seconds.
+          </p>
+
+          <h3>5. OpenCV Pre-processing Pipeline</h3>
+          <p>
+            Raw receipt photos are often blurry, skewed, or poorly lit. Running Tesseract directly on them
+            produces error rates of 30–40% on low-quality inputs. After describing the problem and showing
+            Claude a few example receipt descriptions, it suggested a 4-step pre-processing sequence:
+          </p>
+          <ol>
+            <li><strong>Grayscale conversion</strong> — removes colour noise that confuses character segmentation</li>
+            <li><strong>Gaussian blur</strong> — smooths minor sensor noise before thresholding</li>
+            <li><strong>Adaptive thresholding</strong> — handles uneven lighting across the receipt (a common problem with phone photos)</li>
+            <li><strong>Deskew via Hough transform</strong> — detects and corrects receipt tilt up to ±15°</li>
+          </ol>
+          <p>
+            Implementing this pipeline cut the unreadable-receipt rate from around 40% to approximately 15% on
+            a test set of 200 real receipts. That's not a tuned production model — that's a 4-step OpenCV
+            pipeline suggested in a single conversation.
+          </p>
+
+          <h3>The Velocity Reflection</h3>
+          <p>
+            Looking back at my time log: I estimate Claude saved approximately 60 hours over 3 weeks of
+            evenings and weekends. But the hours saved is the less interesting metric. The more important
+            effect is that Claude made me willing to attempt things I would have otherwise deprioritised.
+          </p>
+          <p>
+            Lambda + SQS from scratch, for a solo side project, on a deadline of "I want to ship this before
+            LHDN filing season"? Without Claude, I'd have reached for a simpler cron job that polls a database
+            table. With Claude as a pair programmer I could interrogate at midnight, I built the right
+            architecture the first time.
+          </p>
+        </section>
+
+        <!-- Section 7 -->
+        <section class="blog-section">
+          <h2>What I'd Do Differently</h2>
+          <p>
+            Shipping something and then learning what you should have done differently is how most of the best
+            engineering judgment gets built. Here's mine.
+          </p>
+          <ul>
+            <li>
+              <strong>ECS Fargate instead of raw EC2.</strong> Running Next.js and Spring Boot as co-located
+              processes on a single EC2 instance works, but zero-downtime deploys require either a Blue/Green
+              swap or careful PM2 orchestration. ECS Fargate with a rolling deployment strategy would handle
+              this cleanly without manual SSH sessions.
+            </li>
+            <li>
+              <strong>An RDS read replica for reporting queries.</strong> The tax estimate dashboard runs
+              aggregation queries across a user's full receipt history. As receipt counts grow, these queries
+              compete with transactional writes on the same RDS instance. A read replica costs roughly
+              double the RDS bill but eliminates this contention entirely.
+            </li>
+            <li>
+              <strong>CloudWatch alarms from day one.</strong> I added monitoring retroactively after the first
+              time a Lambda function silently failed for 6 hours without me noticing. Alarms on DLQ depth,
+              Lambda error rate, and RDS CPU should be part of the initial infrastructure setup, not an
+              afterthought.
+            </li>
+            <li>
+              <strong>AWS CDK for IaC.</strong> All the infrastructure for this project was created through
+              the AWS Console. That works for a side project, but it's unreproducible and undocumented.
+              AWS CDK (with TypeScript) would let me define the entire stack in code, version-control it,
+              and tear it down and rebuild it in minutes.
+            </li>
+          </ul>
+        </section>
+
+        <!-- Section 8 -->
+        <section class="blog-section">
+          <h2>Key Takeaways</h2>
+          <p>
+            Three things I want you to walk away with from this post:
+          </p>
+          <ol>
+            <li>
+              <strong>Async decoupling is not premature optimisation.</strong> When your bottleneck is a
+              2–3 second ML call, making it synchronous is the premature decision. SQS + Lambda costs almost
+              nothing at side-project scale and gives you horizontal scalability for free.
+            </li>
+            <li>
+              <strong>Monorepo discipline pays off.</strong> Having all three services in one repository means
+              cross-service changes — like updating the SQS message schema — are a single commit with a single
+              review. Coordinated deploys become trivial. The friction of monorepo tooling setup is a one-time
+              cost; the benefits compound.
+            </li>
+            <li>
+              <strong>AI coding assistants change the effort curve, not just the speed.</strong> The real
+              value isn't that Claude wrote code faster than I could. It's that it made the activation energy
+              for hard problems low enough that I stopped deferring them. You tackle the right architecture
+              instead of the expedient one.
+            </li>
+          </ol>
+          <p>
+            Clair Tax is live. If you're building something similar — a Malaysian-market fintech, a monorepo
+            AWS deployment, or anything where OCR and async processing intersect — I'm happy to go deeper on
+            any of these sections. Find me on GitHub or LinkedIn.
+          </p>
+        </section>
+
+      </div>
+
+      <!-- Author Card -->
+      <div class="blog-author-card card reveal">
+        <img src="/src/assets/potrait.png" alt="Khor Ze Yi" class="author-avatar" />
+        <div class="author-info">
+          <h3>Written by Khor Ze Yi</h3>
+          <p>Software Engineer specialized in building and deploying scalable web applications and AI-powered systems.</p>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <div class="blog-navigation card reveal">
+        <a href="/blog.html" class="blog-nav-link">
+          <span class="nav-direction">← Back to</span>
+          <span class="nav-title">All Posts</span>
+        </a>
+      </div>
+    </article>
+
+    <footer class="footer">
+      <p class="footer-text">Built with ♥ by Khor Ze Yi // 2026</p>
+    </footer>
+
+    <script src="/src/shared.js"></script>
+  </body>
+</html>

@@ -398,6 +398,131 @@
         </div>
       </div>
 
+      <!-- Project: Clair Tax -->
+      <div class="card span-2 reveal" id="clair-tax">
+        <div class="card-label">AI-Powered FinTech</div>
+        <div class="project-header">
+          <div class="project-title">Clair Tax — AI-powered Malaysian Personal Tax Management System</div>
+          <span class="project-stat">&lt; This project is currently terminated from AWS due to cost controlling.</span>
+        </div>
+        <p class="project-desc">
+          A monorepo tax management platform for Malaysian individual filers, combining a Next.js frontend,
+          Spring Boot REST API, and a FastAPI AI service that auto-extracts line items from tax receipts via OCR.
+          Deployed on AWS with SQS-decoupled async processing, cutting OCR submission response times.
+        </p>
+        <div class="project-highlights">
+          <h4>Key Achievements</h4>
+          <ul>
+            <li>
+              Designed a 3-tier monorepo (Next.js / Spring Boot / FastAPI) on AWS EC2 t3.medium,
+              sustaining ~300 concurrent API requests via Spring Boot's thread pool and HikariCP connection pooling against RDS PostgreSQL
+            </li>
+            <li>
+              Built a FastAPI async OCR pipeline with OpenCV pre-processing (deskew, threshold, denoise)
+              that processes receipts in under 3s end-to-end including S3 retrieval and structured JSON output
+            </li>
+            <li>
+              Decoupled OCR jobs from the HTTP request cycle using AWS SQS + Lambda consumers,
+              reducing perceived API latency by over 90% and enabling horizontal scaling without touching the EC2 instance
+            </li>
+            <li>
+              Implemented a full Malaysian income tax calculation engine covering 12+ LHDN relief categories
+              with real-time tax estimate dashboard and deduction categorisation from scanned receipts
+            </li>
+          </ul>
+        </div>
+        <!-- Project Carousel -->
+        <div class="project-carousel" id="projectCarousel1">
+          <div class="carousel-track">
+            <div class="carousel-slide">
+              <img
+                src="/src/assets/clairtax-1.png"
+                alt="Face Recognition System - Dashboard"
+                loading="lazy"
+                fetchpriority="high"
+                decoding="async"
+              />
+            </div>
+            <div class="carousel-slide">
+              <img
+                src="/src/assets/clairtax-2.png"
+                alt="Face Recognition System - Recognition"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <div class="carousel-slide">
+              <img
+                src="/src/assets/clairtax-3.png"
+                alt="Face Recognition System - Database"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <div class="carousel-slide">
+              <img
+                src="/src/assets/clairtax-4.png"
+                alt="Face Recognition System - Reports"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          </div>
+          <button
+            class="carousel-btn prev"
+            aria-label="Previous slide"
+          >
+            <svg viewBox="0 0 24 24">
+              <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+            </svg>
+          </button>
+          <button
+            class="carousel-btn next"
+            aria-label="Next slide"
+          >
+            <svg viewBox="0 0 24 24">
+              <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
+            </svg>
+          </button>
+          <div class="carousel-indicators">
+            <button
+              class="carousel-dot active"
+              data-index="0"
+              aria-label="Go to slide 1"
+            ></button>
+            <button
+              class="carousel-dot"
+              data-index="1"
+              aria-label="Go to slide 2"
+            ></button>
+            <button
+              class="carousel-dot"
+              data-index="2"
+              aria-label="Go to slide 3"
+            ></button>
+            <button
+              class="carousel-dot"
+              data-index="3"
+              aria-label="Go to slide 4"
+            ></button>
+          </div>
+        </div>
+        <div class="tech-tags">
+          <span class="tech-tag">Next.js</span>
+          <span class="tech-tag">Spring Boot</span>
+          <span class="tech-tag">FastAPI</span>
+          <span class="tech-tag">PostgreSQL</span>
+          <span class="tech-tag">AWS EC2</span>
+          <span class="tech-tag">AWS Lambda</span>
+          <span class="tech-tag">AWS SQS</span>
+          <span class="tech-tag">AWS S3</span>
+          <span class="tech-tag">AWS RDS</span>
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">Java</span>
+          <span class="tech-tag">TypeScript</span>
+        </div>
+      </div>
+
       <!-- More Projects Coming Soon -->
       <div class="card span-2 reveal">
         <div class="card-label">Stay Tuned</div>
